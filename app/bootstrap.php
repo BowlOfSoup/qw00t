@@ -20,7 +20,7 @@ $app->register(new SessionServiceProvider());
 $app->register(new QwootContainer());
 
 # Register routes
-$app->mount('/api/', new QwootRoutes());
+$app->mount(QwootRoutes::PREFIX, new QwootRoutes());
 
 # Database connection.
 $app[Database::ID]->setUp($app);

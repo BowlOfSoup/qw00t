@@ -7,7 +7,7 @@
     RewriteCond %{REQUEST_URI} ^/api/
     RewriteRule (.*) app/bootstrap.php [QSA,L]
 
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^$ web [QSA,L]
+    RewriteCond %{REQUEST_URI} ^/$
+    RewriteRule ^(.*)$ /web/$1 [QSA,l]
 
 </IfModule>

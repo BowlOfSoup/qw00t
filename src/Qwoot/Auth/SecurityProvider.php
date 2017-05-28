@@ -2,6 +2,7 @@
 
 namespace Qwoot\Auth;
 
+use Qwoot\Config\Routes;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -43,7 +44,7 @@ class SecurityProvider
     public function makeSecure($route)
     {
         preg_match('/{(.*?)\}/s', $route, $matches);
-        $this->securedRoutes[] = str_replace('{' . $matches[1] . '}', '#', $route);
+        $this->securedRoutes[] = Routes::PREFIX . str_replace('{' . $matches[1] . '}', '#', $route);
     }
 
     /**

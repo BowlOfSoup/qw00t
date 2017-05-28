@@ -1,7 +1,0 @@
-{
-  "name": "qw00t - quote database",
-
-  "dependencies": {
-    "vue": "^2.2.2"
-  }
-}

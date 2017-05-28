@@ -20,18 +20,20 @@ class QuotesController
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListAction(Request $request)
     {
         if ($request->get('random')) {
-            return new Response(json_encode(
-                $this->quoteService->findRandom()
-            ));
+            return new Response(
+                json_encode(array('result' => $this->quoteService->findRandom()))
+            );
         }
 
-        return new Response(json_encode(
-            $this->quoteService->findAll()
-        ));
+        return new Response(
+            json_encode(array('result' => $this->quoteService->findAll()))
+        );
     }
 }

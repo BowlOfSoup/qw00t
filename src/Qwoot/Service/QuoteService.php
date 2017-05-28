@@ -36,12 +36,51 @@ class QuoteService
      *
      * @return array
      */
-    public function findRandom($numberOfEntries = 20)
+    public function findRandom($numberOfEntries = 5)
     {
         $stmt = $this->db->prepare('SELECT * FROM quote WHERE id IN (SELECT id FROM quote ORDER BY RANDOM() LIMIT :limit)');
         $stmt->bindValue('limit', $numberOfEntries);
         $stmt->execute();
 
-        return $stmt->fetchAll();
+        return $this->prepare($stmt->fetchAll());
+    }
+
+    /**
+     * @param array $quotes
+     *
+     * @return array
+     */
+    private function prepare(array $quotes)
+    {
+        foreach ($quotes as $key => $quote) {
+            $quotes[$key]['context'] = ucfirst($quote['context']);
+            $quotes[$key]['quote'] = ucfirst($quote['quote']);
+            $quotes[$key]['person'] = $this->handleNames($quote['person']);
+        }
+
+        return $quotes;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return string
+     */
+    private function handleNames($name)
+    {
+        $prefixLowercase = array('van', 'der', 'de');
+        $preparedName = null;
+
+        $i = 1;
+        $parts = explode(' ', strtolower($name));
+        foreach($parts as $part) {
+            if ($i > 1) {
+                $preparedName .= ' ';
+            }
+            (!in_array($part, $prefixLowercase)) ? $preparedName .= ucwords($part) : $preparedName .= $part;
+            ++$i;
+        }
+
+        return $preparedName;
     }
 }

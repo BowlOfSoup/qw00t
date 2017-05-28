@@ -8,6 +8,9 @@ use Silex\Api\ControllerProviderInterface;
 
 class Routes implements ControllerProviderInterface
 {
+    const PREFIX = '/api';
+    const SECURE_ROUTE = true;
+
     /** @var \Silex\ControllerCollection */
     private $controllers;
 
@@ -27,7 +30,7 @@ class Routes implements ControllerProviderInterface
         $this->controllers = $this->app['controllers_factory'];
 
         # Add routes here.
-        $this->addRoute('/quotes', 'qwoot.controller.quotes:getListAction', true);
+        $this->addRoute('/quotes', 'qwoot.controller.quotes:getListAction');
 
         return $this->controllers;
     }
