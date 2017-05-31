@@ -50,3 +50,11 @@ body {
   background-color: #5687A3;
   background-image: none;
 }
+.btn-primary:hover {
+    background-color: #d0ac92;
+    border-color: #d0ac92;
+    cursor: pointer;
+}
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: none;
+}

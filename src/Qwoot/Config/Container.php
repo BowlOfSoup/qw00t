@@ -5,7 +5,8 @@ namespace Qwoot\Config;
 use Pimple\Container as PimpleContainer;
 use Pimple\ServiceProviderInterface;
 use Qwoot\Auth\SecurityProvider;
-use Qwoot\Controller\QuotesController;
+use Qwoot\Controller\QuoteController;
+use Qwoot\Repository\QuoteRepository;
 use Qwoot\Service\QuoteService;
 use Silex\Application;
 
@@ -27,6 +28,7 @@ class Container implements ServiceProviderInterface
         $this->configServices();
         $this->controllerServices();
         $this->serviceServices();
+        $this->repositoryServices();
     }
 
     /**
@@ -60,8 +62,8 @@ class Container implements ServiceProviderInterface
      */
     private function controllerServices()
     {
-        $this->container[QuotesController::ID] = function (Application $app) {
-            return new QuotesController(
+        $this->container[QuoteController::ID] = function (Application $app) {
+            return new QuoteController(
                 $app[QuoteService::ID]
             );
         };
@@ -74,6 +76,18 @@ class Container implements ServiceProviderInterface
     {
         $this->container[QuoteService::ID] = function (Application $app) {
             return new QuoteService(
+                $app[QuoteRepository::ID]
+            );
+        };
+    }
+
+    /**
+     * Register services for the \Qwoot\Repository namespace.
+     */
+    private function repositoryServices()
+    {
+        $this->container[QuoteRepository::ID] = function (Application $app) {
+            return new QuoteRepository(
                 $app['db']
             );
         };

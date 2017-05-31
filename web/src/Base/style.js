@@ -55,5 +55,16 @@ export default StyleSheet.create({
         "borderColor": "#5687A3",
         "backgroundColor": "#5687A3",
         "backgroundImage": "none"
+    },
+    "btn-primary:hover": {
+        "backgroundColor": "#d0ac92",
+        "borderColor": "#d0ac92",
+        "cursor": "pointer"
+    },
+    "btn-primary:focus": {
+        "boxShadow": "none"
+    },
+    "btn-primaryfocus": {
+        "boxShadow": "none"
     }
 });

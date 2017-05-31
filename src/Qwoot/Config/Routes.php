@@ -3,6 +3,7 @@
 namespace Qwoot\Config;
 
 use Qwoot\Auth\SecurityProvider;
+use Qwoot\Controller\QuoteController;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
@@ -30,7 +31,7 @@ class Routes implements ControllerProviderInterface
         $this->controllers = $this->app['controllers_factory'];
 
         # Add routes here.
-        $this->addRoute('/quotes', 'qwoot.controller.quotes:getListAction');
+        $this->addRoute('/quotes', QuoteController::ID . ':getListAction');
 
         return $this->controllers;
     }

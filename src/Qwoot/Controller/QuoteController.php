@@ -6,9 +6,9 @@ use Qwoot\Service\QuoteService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class QuotesController
+class QuoteController
 {
-    const ID = 'qwoot.controller.quotes';
+    const ID = 'qwoot.controller.quote_controller';
 
     /** @var \Qwoot\Service\QuoteService */
     private $quoteService;
