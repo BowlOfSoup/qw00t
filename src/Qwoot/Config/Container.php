@@ -64,7 +64,8 @@ class Container implements ServiceProviderInterface
     {
         $this->container[QuoteController::ID] = function (Application $app) {
             return new QuoteController(
-                $app[QuoteService::ID]
+                $app[QuoteService::ID],
+                $app['form.factory']
             );
         };
     }

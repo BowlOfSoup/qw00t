@@ -31,21 +31,21 @@ class Routes implements ControllerProviderInterface
         $this->controllers = $this->app['controllers_factory'];
 
         # Add routes here.
-        $this->addRoute('/quotes', QuoteController::ID . ':getListAction');
+        $this->controllers->get('/quotes', QuoteController::ID . ':getListAction');
+        $this->controllers->post('/quotes', QuoteController::ID . ':createAction');
 
         return $this->controllers;
     }
 
     /**
      * @param string $route
-     * @param string $entryPoint
-     * @param bool $secure
+     *
+     * @return string
      */
-    private function addRoute($route, $entryPoint, $secure = false)
+    private function secureRoute($route)
     {
-        $this->controllers->get($route, $entryPoint);
-        if ($secure) {
-            $this->app[SecurityProvider::ID]->makeSecure($route);
-        }
+        $this->app[SecurityProvider::ID]->makeSecure($route);
+
+        return $route;
     }
 }

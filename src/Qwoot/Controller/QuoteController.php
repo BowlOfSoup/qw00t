@@ -3,8 +3,12 @@
 namespace Qwoot\Controller;
 
 use Qwoot\Service\QuoteService;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class QuoteController
 {
@@ -13,10 +17,15 @@ class QuoteController
     /** @var \Qwoot\Service\QuoteService */
     private $quoteService;
 
+    /** @var \Symfony\Component\Form\FormFactory */
+    private $formFactory;
+
     public function __construct(
-        QuoteService $quoteService
+        QuoteService $quoteService,
+        FormFactory $formFactory
     ) {
         $this->quoteService = $quoteService;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -34,6 +43,34 @@ class QuoteController
 
         return new Response(
             json_encode(array('result' => $this->quoteService->findAll()))
+        );
+    }
+
+
+    public function createAction(Request $request)
+    {
+        $form = $this->formFactory->createNamedBuilder('', FormType::class)
+            ->add('name', TextType::class, array(
+                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 5)))
+            ))
+            ->add('quote')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+//            $data = $form->getData();
+
+            var_dump('valid');
+        } else {
+            foreach ($form->getErrors(true) as $error) {
+                var_dump($error->getOrigin()->getName());
+                var_dump($error->getMessage());
+            }
+        }
+
+        return new Response(
+            json_encode(array('result' => array()))
         );
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 use Silex\Application;
+use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
 use Qwoot\Auth\SecurityProvider;
 use Qwoot\Config\Container as QwootContainer;
 use Qwoot\Config\Database;
@@ -16,7 +18,9 @@ $app['debug'] = true;
 
 # Register containers
 $app->register(new ServiceControllerServiceProvider());
+$app->register(new ValidatorServiceProvider());
 $app->register(new SessionServiceProvider());
+$app->register(new FormServiceProvider());
 $app->register(new QwootContainer());
 
 # Register routes
