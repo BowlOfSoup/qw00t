@@ -2,8 +2,8 @@
 
 namespace Qwoot\Config;
 
-use Qwoot\Auth\SecurityProvider;
 use Qwoot\Controller\QuoteController;
+use Security\Provider\SecurityProvider;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 

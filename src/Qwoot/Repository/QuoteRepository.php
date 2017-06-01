@@ -7,6 +7,7 @@ use Doctrine\DBAL\Connection;
 class QuoteRepository
 {
     const ID = 'qwoot.repository.quote_repository';
+    const TABLE = 'quote';
 
     /** @var \Doctrine\DBAL\Connection */
     private $db;
@@ -43,5 +44,26 @@ class QuoteRepository
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return int
+     */
+    public function insert(array $data)
+    {
+        return $this->db->insert(static::TABLE, $data);
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     *
+     * @return int
+     */
+    public function update(array $data, $id)
+    {
+        return $this->db->update(static::TABLE, $data, array('id' => $id));
     }
 }

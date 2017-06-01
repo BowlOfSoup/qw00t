@@ -2,15 +2,12 @@
 
 namespace Qwoot\Controller;
 
+use Generic\Controller\AbstractController;
+use Qwoot\FormType\FormTypeInterface;
 use Qwoot\Service\QuoteService;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints as Assert;
 
-class QuoteController
+class QuoteController extends AbstractController
 {
     const ID = 'qwoot.controller.quote_controller';
 
@@ -18,14 +15,14 @@ class QuoteController
     private $quoteService;
 
     /** @var \Symfony\Component\Form\FormFactory */
-    private $formFactory;
+    private $quoteFormType;
 
     public function __construct(
         QuoteService $quoteService,
-        FormFactory $formFactory
+        FormTypeInterface $quoteFormType
     ) {
         $this->quoteService = $quoteService;
-        $this->formFactory = $formFactory;
+        $this->quoteFormType = $quoteFormType;
     }
 
     /**
@@ -36,41 +33,31 @@ class QuoteController
     public function getListAction(Request $request)
     {
         if ($request->get('random')) {
-            return new Response(
-                json_encode(array('result' => $this->quoteService->findRandom()))
-            );
+            return $this->response($this->quoteService->findRandom());
         }
 
-        return new Response(
-            json_encode(array('result' => $this->quoteService->findAll()))
-        );
+        return $this->response($this->quoteService->findAll());
     }
 
-
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
-        $form = $this->formFactory->createNamedBuilder('', FormType::class)
-            ->add('name', TextType::class, array(
-                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 5)))
-            ))
-            ->add('quote')
-            ->getForm();
+        $quoteForm = $this->quoteFormType->buildForm();
+        $quoteForm->handleRequest($request);
 
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-//            $data = $form->getData();
-
-            var_dump('valid');
-        } else {
-            foreach ($form->getErrors(true) as $error) {
-                var_dump($error->getOrigin()->getName());
-                var_dump($error->getMessage());
+        if ($this->isFormValid($quoteForm)) {
+            $result = $this->quoteService->insert($quoteForm->getData());
+            if (0 === $result) {
+                return $this->response(array());
             }
+
+            return $this->response(array($quoteForm->getData()));
         }
 
-        return new Response(
-            json_encode(array('result' => array()))
-        );
+        return $this->response(array());
     }
 }

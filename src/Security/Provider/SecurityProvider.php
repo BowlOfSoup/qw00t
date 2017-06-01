@@ -1,6 +1,6 @@
 <?php
 
-namespace Qwoot\Auth;
+namespace Security\Provider;
 
 use Qwoot\Config\Routes;
 use Silex\Application;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Qwoot\Config;
+namespace Generic\Config;
 
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 
 class Database
 {
-    const ID = 'qwoot.config.database';
+    const ID = 'generic.config.database';
 
     /**
      * @param \Silex\Application $app

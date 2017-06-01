@@ -4,8 +4,8 @@ namespace Qwoot\Config;
 
 use Pimple\Container as PimpleContainer;
 use Pimple\ServiceProviderInterface;
-use Qwoot\Auth\SecurityProvider;
 use Qwoot\Controller\QuoteController;
+use Qwoot\FormType\QuoteFormType;
 use Qwoot\Repository\QuoteRepository;
 use Qwoot\Service\QuoteService;
 use Silex\Application;
@@ -24,23 +24,11 @@ class Container implements ServiceProviderInterface
     {
         $this->container = $container;
 
-        $this->authServices();
         $this->configServices();
         $this->controllerServices();
+        $this->formTypeServices();
         $this->serviceServices();
         $this->repositoryServices();
-    }
-
-    /**
-     * Register services for the \Qwoot\Auth namespace.
-     */
-    private function authServices()
-    {
-        $this->container[SecurityProvider::ID] = function (Application $app) {
-            return new SecurityProvider(
-                $app['session']
-            );
-        };
     }
 
     /**
@@ -48,13 +36,7 @@ class Container implements ServiceProviderInterface
      */
     private function configServices()
     {
-        $this->container[Http::ID] = function (Application $app) {
-            return new Http();
-        };
 
-        $this->container[Database::ID] = function (Application $app) {
-            return new Database();
-        };
     }
 
     /**
@@ -65,6 +47,18 @@ class Container implements ServiceProviderInterface
         $this->container[QuoteController::ID] = function (Application $app) {
             return new QuoteController(
                 $app[QuoteService::ID],
+                $app['qwoot.form_type.quote_form_type']
+            );
+        };
+    }
+
+    /**
+     * Register services for the \Qwoot\FormType namespace.
+     */
+    private function formTypeServices()
+    {
+        $this->container[QuoteFormType::ID] = function (Application $app) {
+            return new QuoteFormType(
                 $app['form.factory']
             );
         };
