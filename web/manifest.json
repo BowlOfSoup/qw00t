@@ -1,9 +1,9 @@
 {
   "short_name": "Qw00t",
-  "name": "Qw00t - Medicore Quote Database",
+  "name": "Qw00t - Simple quote database",
 
-  "background_color": "#143A4E",
-  "theme_color": "#18BC9C",
+  "background_color": "",
+  "theme_color": "",
 
   "scope": "/",
   "start_url": "/",
