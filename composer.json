@@ -7,7 +7,8 @@
         "doctrine/dbal": "^2.5",
         "symfony/form": "^3.3",
         "symfony/validator": "^3.3",
-        "symfony/config": "^3.3"
+        "symfony/config": "^3.3",
+        "vlucas/phpdotenv": "^2.4"
     },
     "autoload": {
         "psr-4": {

@@ -2,3 +2,4 @@
 vendor
 qwoot.sqlite3
 ._*
+.env

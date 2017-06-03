@@ -79,6 +79,10 @@ class SecurityProvider
     {
         preg_match_all('/\d+/', $route, $matches);
         foreach ($matches as $match) {
+            if (empty($match)) {
+                continue;
+            }
+
             $route = str_replace($match[0], '#', $route);
         }
 
