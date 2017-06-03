@@ -12,7 +12,7 @@ Set your environment variables:
     cp app/.env.example app/.env
 
 #### Frontend
-GIU with [React](https://github.com/facebook/react)/[Redux](https://github.com/reactjs/redux)/[Bootstrap](https://github.com/twbs/bootstrap). Run to install dependencies:
+GUI with [React](https://github.com/facebook/react)/[Redux](https://github.com/reactjs/redux)/[Bootstrap](https://github.com/twbs/bootstrap). Run to install dependencies:
 Make sure you `cd` to `web/` first!
 
     npm install
