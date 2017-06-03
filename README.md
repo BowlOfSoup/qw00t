@@ -31,7 +31,9 @@ The initial project is set-up in a sqlite3 database, but you can use whatever da
 To make a Sqlite3 database work, you have to set the group of which the http-user (www-data/apache/http) is a member of to the database file.
 
     chgrp yourgroupname app/yourdatabasename.sqlite3
+    chmod 775 app/yourdatabasename.sqlite3
     chgrp yourgroupname app
+    chmod 775 app
 
 Database schema follows.
 
