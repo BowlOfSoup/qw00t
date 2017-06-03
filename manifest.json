@@ -1,0 +1,13 @@
+{
+  "short_name": "Qw00t",
+  "name": "Qw00t - Medicore Quote Database",
+
+  "background_color": "#143A4E",
+  "theme_color": "#18BC9C",
+
+  "scope": "/",
+  "start_url": "/",
+
+  "display": "fullscreen",
+  "orientation": "portrait"
+}

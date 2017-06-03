@@ -24,19 +24,10 @@ class Container implements ServiceProviderInterface
     {
         $this->container = $container;
 
-        $this->configServices();
         $this->controllerServices();
         $this->formTypeServices();
         $this->serviceServices();
         $this->repositoryServices();
-    }
-
-    /**
-     * Register services for the \Qwoot\Config namespace.
-     */
-    private function configServices()
-    {
-
     }
 
     /**

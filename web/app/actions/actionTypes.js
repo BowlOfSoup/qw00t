@@ -1,0 +1,1 @@
+export const GET_QUOTES_SUCCESS = 'GET_QUOTES_SUCCESS';
