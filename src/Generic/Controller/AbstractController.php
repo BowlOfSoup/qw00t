@@ -12,25 +12,27 @@ abstract class AbstractController
     const WRAPPER_RESPONSE = 'result';
     const WRAPPER_META = 'meta';
     const WRAPPER_MESSAGES = 'messages';
-    
-    /** @var int */
-    private $statusCode = 200;
 
-    /**
-     * @param int $code
-     */
-    public function setStatusCode($code)
-    {
-        $this->statusCode = $code;
-    }
+    /** @var array */
+    protected $responseMapping = array();
+
+    /** @var int */
+    protected $statusCode = 200;
 
     /**
      * @param array $controllerResult
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function response(array $controllerResult)
+    protected function response(array $controllerResult = array())
     {
+        if (!empty($controllerResult) && !array_key_exists(0, $controllerResult)) {
+            // Controller result must be sequential array.
+            $controllerResult = array($controllerResult);
+        }
+
+        $controllerResult = $this->prepareProperties($controllerResult);
+
         $response = new Response(
             json_encode(
                 array(
@@ -82,5 +84,40 @@ abstract class AbstractController
         }
 
         return array(static::WRAPPER_MESSAGES => MetaService::getMessages());
+    }
+
+    /**
+     * @param array $controllerResult
+     *
+     * @return array
+     */
+    private function prepareProperties(array $controllerResult)
+    {
+        foreach ($controllerResult as $key => $item) {
+            $controllerResult = $this->mapPropertiesForResponse($controllerResult, $key);
+
+            ksort($controllerResult[$key]);
+        }
+
+        return $controllerResult;
+    }
+
+    /**
+     * @param array $controllerResult
+     * @param string|int $parentKey
+     *
+     * @return array
+     */
+    private function mapPropertiesForResponse(array $controllerResult, $parentKey)
+    {
+        if (empty($this->responseMapping)) {
+            return $controllerResult;
+        }
+
+        foreach ($this->responseMapping as $originalKey => $replacementKey) {
+            $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
+            unset($controllerResult[$parentKey][$originalKey]);
+        }
+        return $controllerResult;
     }
 }

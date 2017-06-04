@@ -52,12 +52,22 @@ class QuoteController extends AbstractController
         if ($this->isFormValid($quoteForm)) {
             $result = $this->quoteService->insert($quoteForm->getData());
             if (0 === $result) {
-                return $this->response(array());
+                return $this->response();
             }
 
-            return $this->response(array($quoteForm->getData()));
+            return $this->response($quoteForm->getData());
         }
 
-        return $this->response(array());
+        return $this->response();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function response(array $controllerResult = array())
+    {
+        $this->responseMapping = array('user_id' => 'user');
+
+        return parent::response($controllerResult);
     }
 }

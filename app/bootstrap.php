@@ -19,7 +19,7 @@ $dotEnv = new Dotenv\Dotenv(__DIR__);
 $dotEnv->load();
 
 $app = new Application();
-$app['debug'] = getenv('SILEX_DEBUG');
+$app['debug'] = (bool) getenv('SILEX_DEBUG');
 
 # Register containers
 ## Third party

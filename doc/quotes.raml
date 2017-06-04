@@ -1,0 +1,53 @@
+description: Collection of quotes.
+get:
+  description: Get a list of quotes based on filter parameters.
+  queryParameters:
+    random:
+      description: "Get random quotes, returns 5 random quotes."
+      required: false
+      type: string
+      example: "?random=1"
+  responses:
+    200:
+      body:
+        application/json:
+          example: |
+            [
+              {
+                "context": "Woensdag bugfixdag",
+                "datetime": "2007-04-17 17:31:36",
+                "id": "252",
+                "kudos": null,
+                "person": "Jan Jansen",
+                "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
+                "user": "1"
+              }
+            ]
+post:
+  description: Create a quote.
+  body:
+    application/json:
+      example: |
+        {
+          "context": "Woensdag bugfixdag",
+          "datetime": "2007-04-17 17:31:36",
+          "id": "252",
+          "kudos": null,
+          "person": "Jan Jansen",
+          "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
+          "user": "1"
+        }
+  responses:
+    200:
+      body:
+        application/json:
+          example: |
+            {
+              "context": "Woensdag bugfixdag",
+              "datetime": "2007-04-17 17:31:36",
+              "id": "252",
+              "kudos": null,
+              "person": "Jan Jansen",
+              "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
+              "user": "1"
+            }
