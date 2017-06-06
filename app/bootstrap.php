@@ -1,8 +1,7 @@
 <?php
 
 use Generic\Config\Container as GenericContainer;
-use Generic\Config\Database as Database;
-use Generic\Config\Http as GenericHttp;
+use Security\Config\Routes as SecurityRoutes;
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -11,7 +10,6 @@ use Silex\Provider\ValidatorServiceProvider;
 use Qwoot\Config\Container as QwootContainer;
 use Qwoot\Config\Routes as QwootRoutes;
 use Security\Config\Container as SecurityContainer;
-use Security\Provider\SecurityProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -19,7 +17,7 @@ $dotEnv = new Dotenv\Dotenv(__DIR__);
 $dotEnv->load();
 
 $app = new Application();
-$app['debug'] = (bool) getenv('SILEX_DEBUG');
+$app['debug'] = getenv('SILEX_DEBUG');
 
 # Register containers
 ## Third party
@@ -33,15 +31,16 @@ $app->register(new QwootContainer());
 $app->register(new SecurityContainer());
 
 # Register routes
-$app->mount(QwootRoutes::PREFIX, new QwootRoutes());
+$app->mount('/api', new SecurityRoutes());
+$app->mount('/api', new QwootRoutes());
 
 # Database connection.
-$app[Database::ID]->setUp($app);
+$app['generic.config.database']->setUp($app);
 
 # Make app accept JSON API requests.
-$app[GenericHttp::ID]->setUp($app);
+$app['generic.config.http']->setUp($app);
 
-# Security check.
-$app[SecurityProvider::ID]->setUp($app);
+# Initialize security.
+$app['security.config.firewall']->setUp($app);
 
 $app->run();

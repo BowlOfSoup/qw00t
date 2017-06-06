@@ -35,9 +35,9 @@ class Container implements ServiceProviderInterface
      */
     private function controllerServices()
     {
-        $this->container[QuoteController::ID] = function (Application $app) {
+        $this->container['qwoot.controller.quote_controller'] = function (Application $app) {
             return new QuoteController(
-                $app[QuoteService::ID],
+                $app['qwoot.service.quote_service'],
                 $app['qwoot.form_type.quote_form_type']
             );
         };
@@ -48,7 +48,7 @@ class Container implements ServiceProviderInterface
      */
     private function formTypeServices()
     {
-        $this->container[QuoteFormType::ID] = function (Application $app) {
+        $this->container['qwoot.form_type.quote_form_type'] = function (Application $app) {
             return new QuoteFormType(
                 $app['form.factory']
             );
@@ -60,9 +60,9 @@ class Container implements ServiceProviderInterface
      */
     private function serviceServices()
     {
-        $this->container[QuoteService::ID] = function (Application $app) {
+        $this->container['qwoot.service.quote_service'] = function (Application $app) {
             return new QuoteService(
-                $app[QuoteRepository::ID]
+                $app['qwoot.repository.quote_repository']
             );
         };
     }
@@ -72,7 +72,7 @@ class Container implements ServiceProviderInterface
      */
     private function repositoryServices()
     {
-        $this->container[QuoteRepository::ID] = function (Application $app) {
+        $this->container['qwoot.repository.quote_repository'] = function (Application $app) {
             return new QuoteRepository(
                 $app['db']
             );

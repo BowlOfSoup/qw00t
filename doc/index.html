@@ -166,7 +166,7 @@
       .resource-modal li > ul {
         margin-bottom: 1em;
       }
-    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>qw00t API documentation <small>version 1</small></h1><p>/api/</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="quotes" class="panel-title">/quotes</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of quotes.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_quotes"><span class="parent"></span>/quotes</a> <span class="methods"><a href="#quotes_get"><span class="badge badge_get">get</span></a> <a href="#quotes_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_quotes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#quotes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of quotes based on filter parameters.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#quotes_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a quote.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of quotes based on filter parameters.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_get_request" data-toggle="tab">Request</a></li><li><a href="#quotes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_get_request"><h3>Query Parameters</h3><ul><li><strong>random</strong>: <em>(string)</em><p>Get random quotes, returns 5 random quotes.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>?random=1</code></pre></div></li></ul></div><div class="tab-pane" id="quotes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>qw00t API documentation <small>version 1</small></h1><p>yourqw00tinstance/api/</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="quotes" class="panel-title">/quotes</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of quotes.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_quotes"><span class="parent"></span>/quotes</a> <span class="methods"><a href="#quotes_get"><span class="badge badge_get">get</span></a> <a href="#quotes_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_quotes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#quotes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of quotes based on filter parameters.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#quotes_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a quote.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of quotes based on filter parameters.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_get_request" data-toggle="tab">Request</a></li><li><a href="#quotes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_get_request"><h3>Query Parameters</h3><ul><li><strong>random</strong>: <em>(string)</em><p>Get random quotes, returns 5 random quotes.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>?random=1</code></pre></div></li></ul></div><div class="tab-pane" id="quotes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"result": [
   {
     "context": "Woensdag bugfixdag",
     "datetime": "2007-04-17 17:31:36",
@@ -176,8 +176,9 @@
     "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
     "user": "1"
   }
-]
-</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a quote.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_post_request" data-toggle="tab">Request</a></li><li><a href="#quotes_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+],
+"meta": []
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a quote.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_post_request" data-toggle="tab">Request</a></li><li><a href="#quotes_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"result": {
   "context": "Woensdag bugfixdag",
   "datetime": "2007-04-17 17:31:36",
   "id": "252",
@@ -185,8 +186,9 @@
   "person": "Jan Jansen",
   "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
   "user": "1"
-}
-</code></pre></div></div><div class="tab-pane" id="quotes_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+},
+"meta": []
+</code></pre></div></div><div class="tab-pane" id="quotes_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"result": {
   "context": "Woensdag bugfixdag",
   "datetime": "2007-04-17 17:31:36",
   "id": "252",
@@ -194,5 +196,15 @@
   "person": "Jan Jansen",
   "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
   "user": "1"
+},
+"meta": []
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/422" target="_blank">422</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"result": [],
+"meta": {
+  "messages": [
+    {
+      "value": "A message, like invalid field etc.",
+      "type": "error"
+    }
+  ]
 }
 </code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#quotes">/quotes</a></li></ul></div></div></div></div></body></html>

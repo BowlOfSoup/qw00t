@@ -12,7 +12,7 @@ get:
       body:
         application/json:
           example: |
-            [
+            "result": [
               {
                 "context": "Woensdag bugfixdag",
                 "datetime": "2007-04-17 17:31:36",
@@ -22,13 +22,14 @@ get:
                 "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
                 "user": "1"
               }
-            ]
+            ],
+            "meta": []
 post:
   description: Create a quote.
   body:
     application/json:
       example: |
-        {
+        "result": {
           "context": "Woensdag bugfixdag",
           "datetime": "2007-04-17 17:31:36",
           "id": "252",
@@ -36,13 +37,14 @@ post:
           "person": "Jan Jansen",
           "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
           "user": "1"
-        }
+        },
+        "meta": []
   responses:
     200:
       body:
         application/json:
           example: |
-            {
+            "result": {
               "context": "Woensdag bugfixdag",
               "datetime": "2007-04-17 17:31:36",
               "id": "252",
@@ -50,4 +52,18 @@ post:
               "person": "Jan Jansen",
               "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
               "user": "1"
+            },
+            "meta": []
+    422:
+      body:
+        application/json:
+          example: |
+            "result": [],
+            "meta": {
+              "messages": [
+                {
+                  "value": "A message, like invalid field etc.",
+                  "type": "error"
+                }
+              ]
             }

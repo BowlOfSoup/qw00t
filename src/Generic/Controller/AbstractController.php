@@ -20,6 +20,29 @@ abstract class AbstractController
     protected $statusCode = 200;
 
     /**
+     * @param array $result
+     * @param array $meta
+     * @param int $statusCode
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public static function jsonResponse(array $result, array $meta = array(), $statusCode = 200)
+    {
+        $response = new Response(
+            json_encode(
+                array(
+                    static::WRAPPER_RESPONSE => $result,
+                    static::WRAPPER_META => $meta,
+                )
+            )
+        );
+        $response->setStatusCode($statusCode);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
      * @param array $controllerResult
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -33,18 +56,7 @@ abstract class AbstractController
 
         $controllerResult = $this->prepareProperties($controllerResult);
 
-        $response = new Response(
-            json_encode(
-                array(
-                    static::WRAPPER_RESPONSE => $controllerResult,
-                    static::WRAPPER_META => $this->getMeta(),
-                )
-            )
-        );
-        $response->setStatusCode($this->statusCode);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return static::jsonResponse($controllerResult, $this->getMeta(), $this->statusCode);
     }
 
     /**

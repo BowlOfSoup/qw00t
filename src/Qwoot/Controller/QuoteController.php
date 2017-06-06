@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class QuoteController extends AbstractController
 {
-    const ID = 'qwoot.controller.quote_controller';
-
     /** @var \Qwoot\Service\QuoteService */
     private $quoteService;
 

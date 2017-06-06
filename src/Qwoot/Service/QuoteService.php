@@ -9,8 +9,6 @@ use Qwoot\Repository\QuoteRepository;
 
 class QuoteService
 {
-    const ID = 'qwoot.service.quote_service';
-
     /** @var \Doctrine\DBAL\Connection */
     private $quoteRepository;
 

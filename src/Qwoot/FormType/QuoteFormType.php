@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class QuoteFormType implements FormTypeInterface
 {
-    const ID = 'qwoot.form_type.quote_form_type';
     const PROP_NAME = 'name';
 
     /** @var \Symfony\Component\Form\FormFactory */

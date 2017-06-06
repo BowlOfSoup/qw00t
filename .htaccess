@@ -11,5 +11,9 @@
     RewriteRule (.*) app/bootstrap.php [QSA,L]
 
     RewriteCond %{REQUEST_URI} ^/$
-    RewriteRule ^(.*)$ /web/$1 [QSA,L]
+    RewriteRule ^(.*)$ web/$1 [QSA,L]
+
+    RedirectMatch 403 ^/app/.env$
+    RedirectMatch 403 ^/app/.env.example$
+    RedirectMatch 403 ^/app/*.sqlite3$
 </IfModule>

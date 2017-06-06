@@ -6,7 +6,6 @@ use Doctrine\DBAL\Connection;
 
 class QuoteRepository
 {
-    const ID = 'qwoot.repository.quote_repository';
     const TABLE = 'quote';
 
     /** @var \Doctrine\DBAL\Connection */

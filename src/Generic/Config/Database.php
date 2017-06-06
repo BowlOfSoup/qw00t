@@ -7,7 +7,6 @@ use Silex\Provider\DoctrineServiceProvider;
 
 class Database
 {
-    const ID = 'generic.config.database';
     const DRIVER_SQLITE = 'pdo_sqlite';
 
     /**

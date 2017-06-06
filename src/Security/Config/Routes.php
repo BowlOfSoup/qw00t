@@ -1,6 +1,6 @@
 <?php
 
-namespace Qwoot\Config;
+namespace Security\Config;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -18,8 +18,7 @@ class Routes implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/quotes', 'qwoot.controller.quote_controller' . ':getListAction');
-        $controllers->post('/quotes', 'qwoot.controller.quote_controller' . ':createAction');
+        $controllers->post('/login');
 
         return $controllers;
     }

@@ -28,11 +28,11 @@ class Container implements ServiceProviderInterface
      */
     private function configServices()
     {
-        $this->container[Http::ID] = function (Application $app) {
+        $this->container['generic.config.http'] = function (Application $app) {
             return new Http();
         };
 
-        $this->container[Database::ID] = function (Application $app) {
+        $this->container['generic.config.database'] = function (Application $app) {
             return new Database();
         };
     }

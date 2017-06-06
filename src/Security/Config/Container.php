@@ -4,7 +4,9 @@ namespace Security\Config;
 
 use Pimple\Container as PimpleContainer;
 use Pimple\ServiceProviderInterface;
-use Security\Provider\SecurityProvider;
+use Security\Authenticator\JwtAuthenticator;
+use Security\Authenticator\PasswordAuthenticator;
+use Security\Provider\UserProvider;
 use Silex\Application;
 
 class Container implements ServiceProviderInterface
@@ -21,7 +23,46 @@ class Container implements ServiceProviderInterface
     {
         $this->container = $container;
 
+        $this->authenticatorServices();
+        $this->configServices();
+        $this->encoderServices();
         $this->providerServices();
+    }
+
+    /**
+     *  Register services for the \Security\Config namespace.
+     */
+    private function authenticatorServices()
+    {
+        $this->container['security.authenticator.jwt_authenticator'] = function(Application $app) {
+            return new JwtAuthenticator();
+        };
+
+        $this->container['security.authenticator.password_authenticator'] = function(Application $app) {
+            return new PasswordAuthenticator(
+                $app['security.encoder_factory']
+            );
+        };
+    }
+
+    /**
+     *  Register services for the \Security\Encoder namespace.
+     */
+    private function encoderServices()
+    {
+        $this->container['security.encoder.jwt_encoder'] = function(Application $app) {
+            return;
+        };
+    }
+
+    /**
+     * Register services for the \Security\Config namespace.
+     */
+    private function configServices()
+    {
+        $this->container['security.config.firewall'] = function(Application $app) {
+            return new Firewall();
+        };
     }
 
     /**
@@ -29,9 +70,9 @@ class Container implements ServiceProviderInterface
      */
     private function providerServices()
     {
-        $this->container[SecurityProvider::ID] = function (Application $app) {
-            return new SecurityProvider(
-                $app['session']
+        $this->container['security.provider.user_provider'] = function(Application $app) {
+            return new UserProvider(
+                $app['db']
             );
         };
     }
