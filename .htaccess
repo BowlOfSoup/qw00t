@@ -16,4 +16,6 @@
     RedirectMatch 403 ^/app/.env$
     RedirectMatch 403 ^/app/.env.example$
     RedirectMatch 403 ^/app/*.sqlite3$
+    RedirectMatch 403 ^/src/.*$
+    RedirectMatch 403 ^/vendor/.*$
 </IfModule>

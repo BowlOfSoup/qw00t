@@ -1,11 +1,13 @@
 <?php
 
-namespace Generic\Config;
+namespace Qwoot\Config;
 
 use Generic\Controller\AbstractController;
 use Generic\Service\MetaService;
+use Security\Http\JwtResponse;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Http
 {
@@ -14,6 +16,7 @@ class Http
      */
     public function setUp(Application $app)
     {
+        // Make sure to accept JSON requests.
         $app->before(function (Request $request) {
             if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
                 $data = json_decode($request->getContent(), true);
@@ -36,6 +39,6 @@ class Http
             }
 
             return AbstractController::jsonResponse(array(), MetaService::getMessages(), $code);
-        });
+        }, 256);
     }
 }

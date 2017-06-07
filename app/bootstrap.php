@@ -37,10 +37,10 @@ $app->mount('/api', new QwootRoutes());
 # Database connection.
 $app['generic.config.database']->setUp($app);
 
-# Make app accept JSON API requests.
-$app['generic.config.http']->setUp($app);
+# Set http request and response handlers.
+$app['qwoot.config.http']->setUp($app);
 
 # Initialize security.
-$app['security.config.firewall']->setUp($app);
+$app['qwoot.config.security']->setUp($app);
 
 $app->run();

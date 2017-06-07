@@ -38,5 +38,10 @@ To make a Sqlite3 database work, you have to set the group of which the http-use
 Database schema follows.
 
 
-#### API documentation (todo)
+#### API documentation
 API documentation is made in [RAML](https://github.com/raml-org/raml-spec), converted to HTML with [raml2html](https://github.com/raml2html/raml2html).
+
+To view API documentation, visit http://yourqw00turl/**doc**. To (re)generate the documentation run:
+
+    cd doc
+    raml2html api.raml > index.html

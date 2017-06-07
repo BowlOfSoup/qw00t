@@ -18,8 +18,6 @@ class Routes implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->post('/login');
-
         return $controllers;
     }
 }

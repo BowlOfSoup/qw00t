@@ -5,6 +5,8 @@ namespace Generic\Service;
 class PersonService
 {
     /**
+     * Correctly outputs Dutch names.
+     *
      * @param string $name
      *
      * @return string

@@ -18,6 +18,8 @@ class Routes implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
+        $controllers->post('/login');
+
         $controllers->get('/quotes', 'qwoot.controller.quote_controller' . ':getListAction');
         $controllers->post('/quotes', 'qwoot.controller.quote_controller' . ':createAction');
 
