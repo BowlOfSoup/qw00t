@@ -1,5 +1,8 @@
 # qw00t
 
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-blue.svg?no-cache=1)](https://php.net/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/550fa6fd-03db-4387-a1bf-01a2f775dabf/mini.png)](https://insight.sensiolabs.com/projects/550fa6fd-03db-4387-a1bf-01a2f775dabf)
+
 This project is still a work in progress! It aims to be a small quotes database.
 
 #### Backend
