@@ -13,9 +13,6 @@ use Silex\Application;
 
 class Container implements ServiceProviderInterface
 {
-    /** @var \Pimple\Container|array */
-    private $container;
-
     /**
      * Register services in the application container.
      *
@@ -23,29 +20,29 @@ class Container implements ServiceProviderInterface
      */
     public function register(PimpleContainer $container)
     {
-        $this->container = $container;
-
-        $this->authenticatorServices();
-        $this->encoderServices();
-        $this->providerServices();
+        $this->authenticatorServices($container);
+        $this->encoderServices($container);
+        $this->providerServices($container);
     }
 
     /**
      *  Register services for the \Security\Config namespace.
+     *
+     *  @param \Pimple\Container $container
      */
-    private function authenticatorServices()
+    private function authenticatorServices(PimpleContainer $container)
     {
-        $this->container['security.authenticator.jwt_authenticator'] = function (Application $app) {
+        $container['security.authenticator.jwt_authenticator'] = function (Application $app) {
             return new JwtAuthenticator();
         };
 
-        $this->container['security.authenticator.password_authenticator'] = function (Application $app) {
+        $container['security.authenticator.password_authenticator'] = function (Application $app) {
             return new PasswordAuthenticator(
                 $app['security.encoder_factory']
             );
         };
 
-        $this->container['security.authenticator.password_authenticator_return_jwt_token'] = function (Application $app) {
+        $container['security.authenticator.password_authenticator_return_jwt_token'] = function (Application $app) {
             return new PasswordAuthenticatorReturnJwtToken(
                 $app['security.encoder_factory'],
                 $app['security.encoder.jwt_token_encoder']
@@ -55,10 +52,12 @@ class Container implements ServiceProviderInterface
 
     /**
      *  Register services for the \Security\Encoder namespace.
+     *
+     *  @param \Pimple\Container $container
      */
-    private function encoderServices()
+    private function encoderServices(PimpleContainer $container)
     {
-        $this->container['security.encoder.jwt_token_encoder'] = function (Application $app) {
+        $container['security.encoder.jwt_token_encoder'] = function (Application $app) {
             return new JwtTokenEncoder(
                 $app['security.defaults']['secret_key'],
                 $app['security.defaults']['token_life_time'],
@@ -69,10 +68,12 @@ class Container implements ServiceProviderInterface
 
     /**
      * Register services for the \Security\Provider namespace.
+     *
+     *  @param \Pimple\Container $container
      */
-    private function providerServices()
+    private function providerServices(PimpleContainer $container)
     {
-        $this->container['security.provider.user_provider'] = function (Application $app) {
+        $container['security.provider.user_provider'] = function (Application $app) {
             return new UserProvider(
                 $app['db']
             );

@@ -12,9 +12,6 @@ use Silex\Application;
 
 class Container implements ServiceProviderInterface
 {
-    /** @var \Pimple\Container */
-    private $container;
-
     /**
      * Register services in the application container.
      *
@@ -22,35 +19,37 @@ class Container implements ServiceProviderInterface
      */
     public function register(PimpleContainer $container)
     {
-        $this->container = $container;
-
-        $this->configServices();
-        $this->controllerServices();
-        $this->formTypeServices();
-        $this->serviceServices();
-        $this->repositoryServices();
+        $this->configServices($container);
+        $this->controllerServices($container);
+        $this->formTypeServices($container);
+        $this->serviceServices($container);
+        $this->repositoryServices($container);
     }
 
     /**
      * Register services for the \Security\Config namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function configServices()
+    private function configServices(PimpleContainer $container)
     {
-        $this->container['qwoot.config.security'] = function (Application $app) {
+        $container['qwoot.config.security'] = function (Application $app) {
             return new Security();
         };
 
-        $this->container['qwoot.config.http'] = function (Application $app) {
+        $container['qwoot.config.http'] = function (Application $app) {
             return new Http();
         };
     }
 
     /**
      * Register services for the \Qwoot\Controller namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function controllerServices()
+    private function controllerServices(PimpleContainer $container)
     {
-        $this->container['qwoot.controller.quote_controller'] = function (Application $app) {
+        $container['qwoot.controller.quote_controller'] = function (Application $app) {
             return new QuoteController(
                 $app['qwoot.service.quote_service'],
                 $app['qwoot.form_type.quote_form_type']
@@ -60,10 +59,12 @@ class Container implements ServiceProviderInterface
 
     /**
      * Register services for the \Qwoot\FormType namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function formTypeServices()
+    private function formTypeServices(PimpleContainer $container)
     {
-        $this->container['qwoot.form_type.quote_form_type'] = function (Application $app) {
+        $container['qwoot.form_type.quote_form_type'] = function (Application $app) {
             return new QuoteFormType(
                 $app['form.factory']
             );
@@ -72,10 +73,12 @@ class Container implements ServiceProviderInterface
 
     /**
      * Register services for the \Qwoot\Service namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function serviceServices()
+    private function serviceServices(PimpleContainer $container)
     {
-        $this->container['qwoot.service.quote_service'] = function (Application $app) {
+        $container['qwoot.service.quote_service'] = function (Application $app) {
             return new QuoteService(
                 $app['qwoot.repository.quote_repository']
             );
@@ -84,10 +87,12 @@ class Container implements ServiceProviderInterface
 
     /**
      * Register services for the \Qwoot\Repository namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function repositoryServices()
+    private function repositoryServices(PimpleContainer $container)
     {
-        $this->container['qwoot.repository.quote_repository'] = function (Application $app) {
+        $container['qwoot.repository.quote_repository'] = function (Application $app) {
             return new QuoteRepository(
                 $app['db']
             );

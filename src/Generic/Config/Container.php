@@ -8,9 +8,6 @@ use Silex\Application;
 
 class Container implements ServiceProviderInterface
 {
-    /** @var \Pimple\Container */
-    private $container;
-
     /**
      * Register services in the application container.
      *
@@ -18,17 +15,17 @@ class Container implements ServiceProviderInterface
      */
     public function register(PimpleContainer $container)
     {
-        $this->container = $container;
-
-        $this->configServices();
+        $this->configServices($container);
     }
 
     /**
      * Register services for the \Qwoot\Config namespace.
+     *
+     * @param \Pimple\Container $container
      */
-    private function configServices()
+    private function configServices(PimpleContainer $container)
     {
-        $this->container['generic.config.database'] = function (Application $app) {
+        $container['generic.config.database'] = function (Application $app) {
             return new Database();
         };
     }
