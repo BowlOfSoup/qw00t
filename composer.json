@@ -1,6 +1,6 @@
 {
     "name": "bowlofsoup/qw00t",
-    "description": "A small quotes database.",
+    "description": "A small quote database.",
     "license": "GPL-3.0",
 
     "require": {

@@ -9,6 +9,7 @@ use Security\Authenticator\PasswordAuthenticator;
 use Security\Authenticator\PasswordAuthenticatorReturnJwtToken;
 use Security\Encoder\JwtTokenEncoder;
 use Security\Provider\UserProvider;
+use Security\Repository\UserRepository;
 use Silex\Application;
 
 class Container implements ServiceProviderInterface
@@ -23,6 +24,7 @@ class Container implements ServiceProviderInterface
         $this->authenticatorServices($container);
         $this->encoderServices($container);
         $this->providerServices($container);
+        $this->repositoryServices($container);
     }
 
     /**
@@ -59,8 +61,8 @@ class Container implements ServiceProviderInterface
     {
         $container['security.encoder.jwt_token_encoder'] = function (Application $app) {
             return new JwtTokenEncoder(
-                $app['security.defaults']['secret_key'],
                 $app['security.defaults']['token_life_time'],
+                $app['security.defaults']['secret_key'],
                 $app['security.defaults']['algorithm']
             );
         };
@@ -75,6 +77,20 @@ class Container implements ServiceProviderInterface
     {
         $container['security.provider.user_provider'] = function (Application $app) {
             return new UserProvider(
+                $app['security.repository.user_repository']
+            );
+        };
+    }
+
+    /**
+     * Register services for the \Qwoot\Repository namespace.
+     *
+     * @param \Pimple\Container $container
+     */
+    private function repositoryServices(PimpleContainer $container)
+    {
+        $container['security.repository.user_repository'] = function (Application $app) {
+            return new UserRepository(
                 $app['db']
             );
         };

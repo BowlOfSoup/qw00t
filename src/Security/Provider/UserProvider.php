@@ -2,7 +2,7 @@
 
 namespace Security\Provider;
 
-use Doctrine\DBAL\Connection;
+use Security\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\User;
@@ -11,31 +11,30 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    /** /** @var \Doctrine\DBAL\Connection */
-    private $db;
+    /** /** @var \Security\Repository\UserRepository */
+    private $userRepository;
 
     /**
-     * @param \Doctrine\DBAL\Connection $databaseConnection
+     * @param \Security\Repository\UserRepository $userRepository
      */
-    public function __construct(
-        Connection $databaseConnection
-    ) {
-        $this->db = $databaseConnection;
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
     }
 
     /**
      * Gets the user for the given username.
      *
-     * @param string $username
+     * @param string $userName
      *
      * @return \Symfony\Component\Security\Core\User\User
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($userName)
     {
-        $stmt = $this->db->executeQuery('SELECT * FROM user WHERE username = ?', array(strtolower($username)));
+        $user = $this->userRepository->findByUsername(strtolower($userName));
 
-        if (!$user = $stmt->fetch()) {
-            throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
+        if (empty($user)) {
+            throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $userName));
         }
 
         // explode(',', $user['roles'])
