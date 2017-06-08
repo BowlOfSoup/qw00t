@@ -2,8 +2,8 @@
 
 namespace Qwoot\Config;
 
-use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Silex\Application;
 
 class Routes implements ControllerProviderInterface
 {

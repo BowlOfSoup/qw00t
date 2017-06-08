@@ -12,6 +12,10 @@ class JwtAuthenticator extends AbstractAuthenticator
     const JWT_TOKEN_SEPARATOR = '.';
 
     /**
+     * Get the authentication credentials from the request.
+     *
+     * Whatever value you return here will be passed to getUser() and checkCredentials().
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return object|null
@@ -37,6 +41,10 @@ class JwtAuthenticator extends AbstractAuthenticator
     }
 
     /**
+     * Return a UserInterface object based on the credentials.
+     *
+     * The $token is the return value from getCredentials().
+     *
      * @param object $token
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *

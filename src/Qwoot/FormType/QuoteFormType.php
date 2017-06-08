@@ -14,13 +14,17 @@ class QuoteFormType implements FormTypeInterface
     /** @var \Symfony\Component\Form\FormFactory */
     private $formFactory;
 
-    public function __construct(
-        FormFactory $formFactory
-    ) {
+    /**
+     * @param \Symfony\Component\Form\FormFactory $formFactory
+     */
+    public function __construct(FormFactory $formFactory)
+    {
         $this->formFactory = $formFactory;
     }
 
     /**
+     * Set form properties, types and constraints.
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function buildForm()
@@ -45,7 +49,7 @@ class QuoteFormType implements FormTypeInterface
                 'user',
                 TextType::class,
                 array(
-                    'property_path' => '[user_id]'
+                    'property_path' => '[user_id]',
                 )
             )
             ->add(

@@ -11,14 +11,14 @@ class PersonService
      *
      * @return string
      */
-    static public function transformName($name)
+    public static function transformName($name)
     {
         $prefixLowercase = array('van', 'der', 'de');
         $preparedName = null;
 
         $i = 1;
         $parts = explode(' ', strtolower($name));
-        foreach($parts as $part) {
+        foreach ($parts as $part) {
             if ($i > 1) {
                 $preparedName .= ' ';
             }

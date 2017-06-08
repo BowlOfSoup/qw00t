@@ -14,9 +14,8 @@ class QuoteRepository
     /**
      * @param \Doctrine\DBAL\Connection $databaseConnection
      */
-    public function __construct(
-        Connection $databaseConnection
-    ) {
+    public function __construct(Connection $databaseConnection)
+    {
         $this->db = $databaseConnection;
     }
 

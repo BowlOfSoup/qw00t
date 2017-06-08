@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractController
 {
-    const STATUS_UNPROCESSABLE = 422;
     const WRAPPER_RESPONSE = 'result';
     const WRAPPER_META = 'meta';
     const WRAPPER_MESSAGES = 'messages';
@@ -17,17 +16,23 @@ abstract class AbstractController
     protected $responseMapping = array();
 
     /** @var int */
-    protected $statusCode = 200;
+    protected $statusCode;
 
     /**
+     * Create and return a response that contains JSON.
+     *
      * @param array $result
      * @param array $meta
      * @param int $statusCode
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public static function jsonResponse(array $result, array $meta = array(), $statusCode = 200)
+    public static function jsonResponse(array $result, array $meta = array(), $statusCode = null)
     {
+        if (null === $statusCode) {
+            $statusCode = Response::HTTP_OK;
+        }
+
         $response = new Response(
             json_encode(
                 array(
@@ -43,6 +48,8 @@ abstract class AbstractController
     }
 
     /**
+     * Processes Response before return.
+     *
      * @param array $controllerResult
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -60,6 +67,8 @@ abstract class AbstractController
     }
 
     /**
+     * Validates a Form by its Constraints.
+     *
      * @param \Symfony\Component\Form\FormInterface $form
      *
      * @return bool
@@ -83,6 +92,8 @@ abstract class AbstractController
     }
 
     /**
+     * Gets meta messages to be attached to a Response.
+     *
      * @return array
      */
     private function getMeta()
@@ -92,13 +103,15 @@ abstract class AbstractController
         }
 
         if (MetaService::hasMessageOfType(MetaService::TYPE_ERROR)) {
-            $this->statusCode = static::STATUS_UNPROCESSABLE;
+            $this->statusCode = Response::HTTP_BAD_REQUEST;
         }
 
         return array(static::WRAPPER_MESSAGES => MetaService::getMessages());
     }
 
     /**
+     * Prepares properties before they're being set on a Response.
+     *
      * @param array $controllerResult
      *
      * @return array
@@ -115,6 +128,8 @@ abstract class AbstractController
     }
 
     /**
+     * Maps property names for a Response.
+     *
      * @param array $controllerResult
      * @param string|int $parentKey
      *
@@ -130,6 +145,7 @@ abstract class AbstractController
             $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
             unset($controllerResult[$parentKey][$originalKey]);
         }
+
         return $controllerResult;
     }
 }

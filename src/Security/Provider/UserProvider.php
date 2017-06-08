@@ -2,12 +2,12 @@
 
 namespace Security\Provider;
 
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\User;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Doctrine\DBAL\Connection;
+use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
@@ -24,6 +24,8 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
+     * Gets the user for the given username.
+     *
      * @param string $username
      *
      * @return \Symfony\Component\Security\Core\User\User
@@ -36,11 +38,13 @@ class UserProvider implements UserProviderInterface
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
 
-        // @todo: explode(',', $user['roles'])
+        // explode(',', $user['roles'])
         return new User($user['username'], $user['password'], array(), true, true, true, true);
     }
 
     /**
+     * Refreshes the user for the account interface.
+     *
      * @param \Symfony\Component\Security\Core\User\UserInterface $user
      *
      * @return \Symfony\Component\Security\Core\User\User|\Symfony\Component\Security\Core\User\UserInterface
@@ -55,6 +59,8 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
+     * The user class this provider supports.
+     *
      * @param string $class
      *
      * @return bool

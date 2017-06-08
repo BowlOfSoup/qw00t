@@ -36,7 +36,7 @@ class Container implements ServiceProviderInterface
      */
     private function configServices()
     {
-        $this->container['qwoot.config.security'] = function(Application $app) {
+        $this->container['qwoot.config.security'] = function (Application $app) {
             return new Security();
         };
 

@@ -2,6 +2,9 @@
 
 namespace Generic\Service;
 
+/**
+ * You can use this class to store meta messages used in e.g. a Response.
+ */
 class MetaService
 {
     const MESSAGE_DATABASE = 'Error in database action. Try again later.';
@@ -13,6 +16,8 @@ class MetaService
     private static $messages = array();
 
     /**
+     * Add a message to the meta bag.
+     *
      * @param string $message
      * @param string $type
      */
@@ -25,6 +30,8 @@ class MetaService
     }
 
     /**
+     * Returns if there are messages in this bag.
+     *
      * @return bool
      */
     public static function hasMessages()
@@ -33,6 +40,8 @@ class MetaService
     }
 
     /**
+     * Check if a message exists in this bag for a certain type.
+     *
      * @param string $type
      *
      * @return bool
@@ -49,6 +58,8 @@ class MetaService
     }
 
     /**
+     * Get messages stored in this bag.
+     *
      * @return array
      */
     public static function getMessages()

@@ -4,14 +4,14 @@ namespace Qwoot\Config;
 
 use Generic\Controller\AbstractController;
 use Generic\Service\MetaService;
-use Security\Http\JwtResponse;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class Http
 {
     /**
+     * Apply Middleware to a HTTP Request.
+     *
      * @param \Silex\Application $app
      */
     public function setUp(Application $app)

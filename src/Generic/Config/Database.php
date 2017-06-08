@@ -10,6 +10,8 @@ class Database
     const DRIVER_SQLITE = 'pdo_sqlite';
 
     /**
+     * Setup database connection.
+     *
      * @param \Silex\Application $app
      */
     public function setUp(Application $app)
@@ -17,8 +19,8 @@ class Database
         if (static::DRIVER_SQLITE === getenv('DATABASE_DRIVER')) {
             $app->register(new DoctrineServiceProvider(), array(
                 'db.options' => array(
-                    'driver'   => static::DRIVER_SQLITE,
-                    'path'     => __DIR__.'/../../../app/' . getenv('DATABASE_FILE'),
+                    'driver' => static::DRIVER_SQLITE,
+                    'path' => __DIR__.'/../../../app/' . getenv('DATABASE_FILE'),
                 ),
             ));
 

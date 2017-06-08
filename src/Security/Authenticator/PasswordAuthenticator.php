@@ -26,6 +26,10 @@ class PasswordAuthenticator extends AbstractAuthenticator
     }
 
     /**
+     * Get the authentication credentials from the request.
+     *
+     * Whatever value you return here will be passed to getUser() and checkCredentials().
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array|null
@@ -49,6 +53,10 @@ class PasswordAuthenticator extends AbstractAuthenticator
     }
 
     /**
+     * Return a UserInterface object based on the credentials.
+     *
+     * $credentials is the return value from getCredentials().
+     *
      * @param array $credentials
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *
@@ -60,6 +68,10 @@ class PasswordAuthenticator extends AbstractAuthenticator
     }
 
     /**
+     * Returns true if the credentials are valid.
+     *
+     * $credentials is the return value from getCredentials().
+     *
      * @param array $credentials
      * @param \Symfony\Component\Security\Core\User\UserInterface $user
      *

@@ -24,6 +24,8 @@ class QuoteController extends AbstractController
     }
 
     /**
+     * Get of filter list of quotes.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -38,6 +40,8 @@ class QuoteController extends AbstractController
     }
 
     /**
+     * Create a quote.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response

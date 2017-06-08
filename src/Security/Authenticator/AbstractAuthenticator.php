@@ -16,22 +16,31 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     const HTTP_HEADER = 'X-Access-Token';
 
     /**
-     * @param object $token
+     * Returns true if the credentials are valid.
+     *
+     * $credentials is the return value from getCredentials().
+     *
+     * @param mixed $credentials
      * @param \Symfony\Component\Security\Core\User\UserInterface $user
+     *
+     * @throws AuthenticationException
      *
      * @return bool
      */
-    public function checkCredentials($token, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user)
     {
         return true;
     }
 
     /**
+     * Called when authentication executed and was successful.
+     *
+     * This should return the Response sent back to the user.
+     * If you return null, the current request will continue, and the user will be authenticated.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @param string $providerKey
-     *
-     * @return null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -39,6 +48,12 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
+     * Called when authentication executed, but failed (e.g. wrong username password).
+     *
+     * This should return the Response sent back to the user, like a RedirectResponse to a login page or a 403 response.
+     *
+     * If you return null, the request will continue.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
      *
@@ -52,7 +67,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
-     * Called when authentication is needed, but it's not sent.
+     * Returns a response that directs the user to authenticate, when authentication is needed, but it's not sent.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Exception\AuthenticationException|null $authException
@@ -65,9 +80,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
-     * Stateless does not support remember me.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function supportsRememberMe()
     {
@@ -75,6 +88,8 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
+     * Returns a response which indicates that authentication is (still) required.
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function failAuthentication()

@@ -27,6 +27,8 @@ class PasswordAuthenticatorReturnJwtToken extends PasswordAuthenticator
     }
 
     /**
+     * Called when authentication executed and was successful.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @param string $providerKey

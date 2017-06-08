@@ -1,6 +1,7 @@
 {
-    "name": "qw00t - quote database",
-    "license": "GNU GPLv3",
+    "name": "qw00t",
+    "description": "A small quotes database.",
+    "license": "GPL-3.0",
 
     "require": {
         "silex/silex": "~2.0",

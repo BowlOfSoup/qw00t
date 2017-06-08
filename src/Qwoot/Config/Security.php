@@ -23,6 +23,8 @@ class Security
     }
 
     /**
+     * Configure the security components.
+     *
      * @param \Silex\Application $app
      */
     private function configureSecurity(Application $app)
@@ -49,9 +51,9 @@ class Security
                         'authenticators' => array(
                             'security.authenticator.jwt_authenticator',
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         ));
 
         // Setup the custom security component.
@@ -62,16 +64,14 @@ class Security
         $app->register(new SecurityProvider());
 
         // Set custom password encoder.
-        $app['security.default_encoder'] = function(Application $app) {
-
-//            $password = new Pbkdf2PasswordEncoder();
-//            var_dump($password->encodePassword('legacy', getenv('AUTHENTICATION_SECRET')));
-
+        $app['security.default_encoder'] = function (Application $app) {
             return $app['security.encoder.pbkdf2'];
         };
     }
 
     /**
+     * Validate mandatory dependencies for the security components to work.
+     *
      * @param \Silex\Application $app
      */
     private function validateDependencies(Application $app)
@@ -79,16 +79,18 @@ class Security
         // Make sure specific environment variables are set.
         $app->before(function (Request $request, Application $app) {
             if (empty(getenv('AUTHENTICATION_SECRET'))) {
-                $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, "Environment variable AUTHENTICATION_SECRET is not set.");
+                $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Environment variable AUTHENTICATION_SECRET is not set.');
             }
 
             if (empty(getenv('TOKEN_LIFETIME'))) {
-                $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, "Environment variable TOKEN_LIFETIME is not set.");
+                $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Environment variable TOKEN_LIFETIME is not set.');
             }
         }, Application::EARLY_EVENT);
     }
 
     /**
+     * Set actions for security specific Responses.
+     *
      * @param \Silex\Application $app
      */
     private function handleResponse(Application $app)

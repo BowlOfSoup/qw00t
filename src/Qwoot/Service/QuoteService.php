@@ -72,6 +72,8 @@ class QuoteService
     }
 
     /**
+     * Prepare quotes for Response.
+     *
      * @param array $quotes
      *
      * @return array
