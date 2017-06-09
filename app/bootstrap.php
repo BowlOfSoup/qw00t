@@ -4,7 +4,6 @@ use Generic\Config\Container as GenericContainer;
 use Qwoot\Config\Container as QwootContainer;
 use Qwoot\Config\Routes as QwootRoutes;
 use Security\Config\Container as SecurityContainer;
-use Security\Config\Routes as SecurityRoutes;
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -31,7 +30,6 @@ $app->register(new QwootContainer());
 $app->register(new SecurityContainer());
 
 // Register routes
-$app->mount('/api', new SecurityRoutes());
 $app->mount('/api', new QwootRoutes());
 
 // Database connection.

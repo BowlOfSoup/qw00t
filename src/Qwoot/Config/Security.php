@@ -32,6 +32,11 @@ class Security
         // Setup the Silex security component.
         $app->register(new SecurityServiceProvider(), array(
             'security.firewalls' => array(
+                'createUser' => array(
+                    'anonymous' => true,
+                    'pattern' => '^/api/user',
+                    'methods' => array('POST'),
+                ),
                 'login' => array(
                     'pattern' => '^/api/login',
                     'stateless' => true,
@@ -49,7 +54,7 @@ class Security
                     'stateless' => true,
                     'guard' => array(
                         'authenticators' => array(
-                            'security.authenticator.jwt_authenticator',
+                            'security.authenticator.jwt_token_authenticator',
                         ),
                     ),
                 ),

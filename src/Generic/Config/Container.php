@@ -15,16 +15,7 @@ class Container implements ServiceProviderInterface
      */
     public function register(PimpleContainer $container)
     {
-        $this->configServices($container);
-    }
-
-    /**
-     * Register services for the \Qwoot\Config namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function configServices(PimpleContainer $container)
-    {
+        // Config services.
         $container['generic.config.database'] = function (Application $app) {
             return new Database();
         };

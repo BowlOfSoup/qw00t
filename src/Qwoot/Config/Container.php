@@ -19,79 +19,37 @@ class Container implements ServiceProviderInterface
      */
     public function register(PimpleContainer $container)
     {
-        $this->configServices($container);
-        $this->controllerServices($container);
-        $this->formTypeServices($container);
-        $this->serviceServices($container);
-        $this->repositoryServices($container);
-    }
-
-    /**
-     * Register services for the \Security\Config namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function configServices(PimpleContainer $container)
-    {
+        // Config services.
         $container['qwoot.config.security'] = function (Application $app) {
             return new Security();
         };
-
         $container['qwoot.config.http'] = function (Application $app) {
             return new Http();
         };
-    }
 
-    /**
-     * Register services for the \Qwoot\Controller namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function controllerServices(PimpleContainer $container)
-    {
+        // Controller services.
         $container['qwoot.controller.quote_controller'] = function (Application $app) {
             return new QuoteController(
                 $app['qwoot.service.quote_service'],
                 $app['qwoot.form_type.quote_form_type']
             );
         };
-    }
 
-    /**
-     * Register services for the \Qwoot\FormType namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function formTypeServices(PimpleContainer $container)
-    {
+        // FormType services.
         $container['qwoot.form_type.quote_form_type'] = function (Application $app) {
             return new QuoteFormType(
                 $app['form.factory']
             );
         };
-    }
 
-    /**
-     * Register services for the \Qwoot\Service namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function serviceServices(PimpleContainer $container)
-    {
+        // Service services.
         $container['qwoot.service.quote_service'] = function (Application $app) {
             return new QuoteService(
                 $app['qwoot.repository.quote_repository']
             );
         };
-    }
 
-    /**
-     * Register services for the \Qwoot\Repository namespace.
-     *
-     * @param \Pimple\Container $container
-     */
-    private function repositoryServices(PimpleContainer $container)
-    {
+        // Repository services.
         $container['qwoot.repository.quote_repository'] = function (Application $app) {
             return new QuoteRepository(
                 $app['db']

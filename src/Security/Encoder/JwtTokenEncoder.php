@@ -71,7 +71,7 @@ class JwtTokenEncoder
         }
 
         try {
-            return JWT::decode($token, $this->secretKey, $this->algorithm);
+            return JWT::decode($token, $this->secretKey, array($this->algorithm));
         } catch (\UnexpectedValueException $e) {
             throw new \UnexpectedValueException($e->getMessage());
         } catch (\DomainException $e) {

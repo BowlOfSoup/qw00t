@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractController
 {
-    const WRAPPER_RESPONSE = 'result';
+    const WRAPPER_RESPONSE = 'data';
     const WRAPPER_META = 'meta';
     const WRAPPER_MESSAGES = 'messages';
 
@@ -142,6 +142,12 @@ abstract class AbstractController
         }
 
         foreach ($this->responseMapping as $originalKey => $replacementKey) {
+            if (null === $replacementKey) {
+                unset($controllerResult[$parentKey][$originalKey]);
+
+                continue;
+            }
+
             $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
             unset($controllerResult[$parentKey][$originalKey]);
         }

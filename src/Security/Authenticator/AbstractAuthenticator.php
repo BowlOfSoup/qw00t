@@ -13,8 +13,6 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
 {
-    const HTTP_HEADER = 'X-Access-Token';
-
     /**
      * Returns true if the credentials are valid.
      *
@@ -41,6 +39,8 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @param string $providerKey
+     *
+     * @return null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {

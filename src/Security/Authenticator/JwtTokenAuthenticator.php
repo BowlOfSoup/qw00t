@@ -2,14 +2,30 @@
 
 namespace Security\Authenticator;
 
-use Firebase\JWT\JWT;
+use Security\Encoder\JwtTokenEncoder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class JwtAuthenticator extends AbstractAuthenticator
+class JwtTokenAuthenticator extends AbstractAuthenticator
 {
-    const JWT_TOKEN_SEPARATOR = '.';
+    /** @var \Security\Encoder\JwtTokenEncoder */
+    private $jwtTokenEncoder;
+
+    /** @var string */
+    private $authorizationHeader;
+
+    /**
+     * @param \Security\Encoder\JwtTokenEncoder $jwtTokenEncoder
+     * @param string $authorizationHeader
+     */
+    public function __construct(
+        JwtTokenEncoder $jwtTokenEncoder,
+        $authorizationHeader
+    ) {
+        $this->jwtTokenEncoder = $jwtTokenEncoder;
+        $this->authorizationHeader = $authorizationHeader;
+    }
 
     /**
      * Get the authentication credentials from the request.
@@ -22,22 +38,11 @@ class JwtAuthenticator extends AbstractAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        if (!$token = $request->headers->get(static::HTTP_HEADER)) {
+        if (!$token = $request->headers->get($this->authorizationHeader)) {
             return null;
         }
 
-        // Header must contain JWT token.
-        if (false === strpos($token, static::JWT_TOKEN_SEPARATOR)) {
-            return null;
-        }
-
-        try {
-            return JWT::decode($token, getenv('AUTHENTICATION_SECRET'), array('HS256'));
-        } catch (\UnexpectedValueException $e) {
-            throw new \UnexpectedValueException($e->getMessage());
-        } catch (\DomainException $e) {
-            throw new \UnexpectedValueException($e->getMessage());
-        }
+        return $this->jwtTokenEncoder->decode($token);
     }
 
     /**

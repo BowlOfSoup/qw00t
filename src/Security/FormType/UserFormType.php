@@ -1,15 +1,19 @@
 <?php
 
-namespace Qwoot\FormType;
+namespace Security\FormType;
 
 use Generic\FormType\FormTypeInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class QuoteFormType implements FormTypeInterface
+class UserFormType implements FormTypeInterface
 {
+    const PROPERTY_PASSWORD = 'password';
+
     /** @var \Symfony\Component\Form\FormFactory */
     private $formFactory;
 
@@ -30,32 +34,32 @@ class QuoteFormType implements FormTypeInterface
     {
         return $this->formFactory->createNamedBuilder('', FormType::class)
             ->add(
-                'datetime',
-                TextType::class,
-                array(
-                    'empty_data' => date('Y-m-d H:i:s'),
-                )
-            )
-            ->add('context', TextType::class)
-            ->add(
-                'quote',
-                TextType::class,
-                array(
-                    'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 5))),
-                )
-            )
-            ->add(
-                'user',
-                TextType::class,
-                array(
-                    'property_path' => '[user_id]',
-                )
-            )
-            ->add(
-                'person',
+                'userName',
                 TextType::class,
                 array(
                     'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 2))),
+                    'property_path' => '[username]',
+                )
+            )
+            ->add(
+                'password',
+                PasswordType::class,
+                array(
+                    'constraints' => array(new Assert\NotBlank()),
+                )
+            )
+            ->add(
+                'name',
+                TextType::class,
+                array(
+                    'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 2))),
+                )
+            )
+            ->add(
+                'email',
+                EmailType::class,
+                array(
+                    'constraints' => array(new Assert\Email()),
                 )
             )
             ->getForm();

@@ -16,12 +16,16 @@ class PasswordAuthenticatorReturnJwtToken extends PasswordAuthenticator
     /**
      * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
      * @param \Security\Encoder\JwtTokenEncoder $jwtTokenEncoder
+     * @param string $passwordSalt
+     * @param string $authorizationHeader
      */
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
-        JwtTokenEncoder $jwtTokenEncoder
+        JwtTokenEncoder $jwtTokenEncoder,
+        $passwordSalt,
+        $authorizationHeader
     ) {
-        parent::__construct($encoderFactory);
+        parent::__construct($encoderFactory, $passwordSalt, $authorizationHeader);
 
         $this->jwtEncoder = $jwtTokenEncoder;
     }

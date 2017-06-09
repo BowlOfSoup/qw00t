@@ -16,13 +16,25 @@ class PasswordAuthenticator extends AbstractAuthenticator
     /** @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface */
     protected $encoderFactory;
 
+    /** @var string */
+    private $passwordSalt;
+
+    /** @var string */
+    private $authorizationHeader;
+
     /**
      * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     * @param string $passwordSalt
+     * @param string $authorizationHeader
      */
     public function __construct(
-        EncoderFactoryInterface $encoderFactory
+        EncoderFactoryInterface $encoderFactory,
+        $passwordSalt,
+        $authorizationHeader
     ) {
         $this->encoderFactory = $encoderFactory;
+        $this->passwordSalt = $passwordSalt;
+        $this->authorizationHeader = $authorizationHeader;
     }
 
     /**
@@ -36,7 +48,7 @@ class PasswordAuthenticator extends AbstractAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        if (!$token = $request->headers->get(static::HTTP_HEADER)) {
+        if (!$token = $request->headers->get($this->authorizationHeader)) {
             return null;
         }
 
@@ -84,7 +96,7 @@ class PasswordAuthenticator extends AbstractAuthenticator
         return $encoder->isPasswordValid(
             $user->getPassword(),
             $credentials[static::PROPERTY_SECRET],
-            getenv('AUTHENTICATION_SECRET')
+            $this->passwordSalt
         );
     }
 }

@@ -8,7 +8,7 @@ export default function qoutesReducer(state = {}, action) {
       console.log('reducer', quotes)
 
       return Object.assign({}, state, {
-        data: quotes.result
+        data: quotes.data
       });
 
     default:

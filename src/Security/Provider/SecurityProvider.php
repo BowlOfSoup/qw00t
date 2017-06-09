@@ -26,11 +26,14 @@ class SecurityProvider implements ServiceProviderInterface
 
         $app['security.defaults'] = array_replace_recursive(array(
             'secret_key' => 'default_secure_key_please_overwrite_this_value',
+            'password_strength_regex' => '((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{10,})',
             'token_life_time' => 86400,
-            'algorithm' => 'HS256',
-            'options' => array(
-                'header_name' => 'X-Access-Token',
-            ),
+            'token_algorithm' => 'HS256',
+            'authorization_header' => 'X-Access-Token',
+            'messages' => array(
+                'username_or_email_already_in_use_error' => '\'%s\' is already in use.',
+                'password_strength_error' => 'Invalid password: must contain at least 10 characters with lower/uppercase letters, numbers and special characters.',
+            )
         ), $app['security.defaults']);
     }
 }

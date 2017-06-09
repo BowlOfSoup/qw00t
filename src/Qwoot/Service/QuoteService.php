@@ -46,13 +46,7 @@ class QuoteService
      */
     public function insert(array $data)
     {
-        try {
-            return $this->quoteRepository->insert($data);
-        } catch (DBALException $e) {
-            MetaService::addMessage(MetaService::MESSAGE_DATABASE);
-        }
-
-        return 0;
+        return $this->quoteRepository->insert($data);
     }
 
     /**
@@ -62,13 +56,7 @@ class QuoteService
      */
     public function update(array $data)
     {
-        try {
-            return $this->quoteRepository->update($data, $data['id']);
-        } catch (DBALException $e) {
-            MetaService::addMessage(MetaService::MESSAGE_DATABASE);
-        }
-
-        return 0;
+        return $this->quoteRepository->update($data, $data['id']);
     }
 
     /**

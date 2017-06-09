@@ -3,7 +3,7 @@
 namespace Qwoot\Controller;
 
 use Generic\Controller\AbstractController;
-use Qwoot\FormType\FormTypeInterface;
+use Generic\FormType\FormTypeInterface;
 use Qwoot\Service\QuoteService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,9 +12,13 @@ class QuoteController extends AbstractController
     /** @var \Qwoot\Service\QuoteService */
     private $quoteService;
 
-    /** @var \Symfony\Component\Form\FormFactory */
+    /** @var \Generic\FormType\FormTypeInterface */
     private $quoteFormType;
 
+    /**
+     * @param \Qwoot\Service\QuoteService $quoteService
+     * @param \Generic\FormType\FormTypeInterface $quoteFormType
+     */
     public function __construct(
         QuoteService $quoteService,
         FormTypeInterface $quoteFormType

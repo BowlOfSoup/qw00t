@@ -1,6 +1,6 @@
 <?php
 
-namespace Qwoot\FormType;
+namespace Generic\FormType;
 
 interface FormTypeInterface
 {
