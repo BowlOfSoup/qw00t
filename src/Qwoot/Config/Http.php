@@ -29,7 +29,6 @@ class Http
 
         // If route is part of API, do not send pretty responses.
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-
             if (false !== strpos($request->getRequestUri(), 'api/')) {
                 $message = 'We are sorry, but something went terribly wrong.';
 

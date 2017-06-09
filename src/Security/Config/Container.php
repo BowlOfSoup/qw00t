@@ -73,7 +73,6 @@ class Container implements ServiceProviderInterface
             );
         };
 
-
         // FormType services.
         $container['security.form_type.user_form_type'] = function (Application $app) {
             return new UserFormType(

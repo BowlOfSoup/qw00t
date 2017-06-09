@@ -33,7 +33,7 @@ class SecurityProvider implements ServiceProviderInterface
             'messages' => array(
                 'username_or_email_already_in_use_error' => '\'%s\' is already in use.',
                 'password_strength_error' => 'Invalid password: must contain at least 10 characters with lower/uppercase letters, numbers and special characters.',
-            )
+            ),
         ), $app['security.defaults']);
     }
 }
