@@ -1,0 +1,30 @@
+description: Login a user.
+post:
+  description: Request a token for a user.
+  headers:
+    X-Access-Token:
+      type: string
+      description: Username and password divided by a colon.
+      items:
+        example: username:password
+  responses:
+    200:
+      body:
+        application/json:
+          example: |
+            "data": {
+              "username": "username",
+              "token": "string.string.string"
+            },
+            "meta": []
+    401:
+      body:
+        application/json:
+          example: |
+            "data": [],
+            "meta": [
+              {
+                "value": "Username could not be found.",
+                "type": "error"
+              }
+            ]

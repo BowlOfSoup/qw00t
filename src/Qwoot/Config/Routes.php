@@ -19,8 +19,8 @@ class Routes implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->post('/login');
-        $controllers->post('/user', 'security.controller.user_controller' . ':createAction');
-        $controllers->put('/user/{userId}', 'security.controller.user_controller' . ':updateAction');
+        $controllers->post('/users', 'security.controller.user_controller' . ':createAction');
+        $controllers->put('/users/{userId}', 'security.controller.user_controller' . ':updateAction');
 
         $controllers->get('/quotes', 'qwoot.controller.quote_controller' . ':getListAction');
         $controllers->post('/quotes', 'qwoot.controller.quote_controller' . ':createAction');

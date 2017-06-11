@@ -1,0 +1,24 @@
+200:
+  body:
+    application/json:
+      example: |
+        "data": {
+          "email": "email@email.com"
+          "id": 434,
+          "name": "full name",
+          "username": "username"
+        },
+        "meta": []
+400:
+  body:
+    application/json:
+      example: |
+        "data": [],
+        "meta": {
+          "messages": [
+            {
+              "value": "A message, like invalid field etc.",
+              "type": "error"
+            }
+          ]
+        }

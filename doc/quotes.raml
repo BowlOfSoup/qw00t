@@ -8,22 +8,7 @@ get:
       type: string
       example: "?random=1"
   responses:
-    200:
-      body:
-        application/json:
-          example: |
-            "result": [
-              {
-                "context": "Woensdag bugfixdag",
-                "datetime": "2007-04-17 17:31:36",
-                "id": "252",
-                "kudos": null,
-                "person": "Jan Jansen",
-                "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
-                "user": "1"
-              }
-            ],
-            "meta": []
+    200: !include quotes/response200.raml
 post:
   description: Create a quote.
   body:
@@ -38,25 +23,12 @@ post:
           "user": "1"
         }
   responses:
-    200:
+    200: !include quotes/response200.raml
+    400:
       body:
         application/json:
           example: |
-            "result": {
-              "context": "Woensdag bugfixdag",
-              "datetime": "2007-04-17 17:31:36",
-              "id": "252",
-              "kudos": null,
-              "person": "Jan Jansen",
-              "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
-              "user": "1"
-            },
-            "meta": []
-    422:
-      body:
-        application/json:
-          example: |
-            "result": [],
+            "data": [],
             "meta": {
               "messages": [
                 {

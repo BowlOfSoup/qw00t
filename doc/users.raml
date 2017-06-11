@@ -1,0 +1,10 @@
+description: Action on a user.
+post:
+  description: Create a user.
+  body: !include users/body.raml
+  responses: !include users/responses.raml
+/{userId}:
+  put:
+    description: Update a user.
+    body: !include users/body.raml
+    responses: !include users/responses.raml
