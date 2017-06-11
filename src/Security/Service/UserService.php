@@ -16,6 +16,9 @@ class UserService
     /** @var \Security\Encoder\PasswordEncoder */
     private $passwordEncoder;
 
+    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage */
+    private $tokenStorage;
+
     /** @var string */
     private $messageUserOrEmailAlreadyInUse;
 

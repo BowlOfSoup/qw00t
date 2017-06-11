@@ -20,6 +20,22 @@ class QuoteRepository
     }
 
     /**
+     * Find one record by id.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function find($id)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM quote WHERE id = :id');
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
      * @return array
      */
     public function findAll()
@@ -55,13 +71,12 @@ class QuoteRepository
     }
 
     /**
-     * @param array $data
-     * @param int $id
+     * @param int $quoteId
      *
      * @return int
      */
-    public function update(array $data, $id)
+    public function delete($quoteId)
     {
-        return $this->db->update(static::TABLE, $data, array('id' => $id));
+        return $this->db->delete(static::TABLE, array('id' => $quoteId));
     }
 }

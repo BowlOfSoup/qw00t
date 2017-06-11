@@ -65,6 +65,8 @@ class UserController extends AbstractController
         $existingUser = $this->userService->find($userId);
         if (!$existingUser) {
             $this->statusCode = Response::HTTP_NOT_FOUND;
+
+            return $this->response();
         }
 
         $authenticatedUser = $this->userService->getAuthenticatedUser();

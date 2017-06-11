@@ -31,7 +31,8 @@ class Container implements ServiceProviderInterface
         $container['qwoot.controller.quote_controller'] = function (Application $app) {
             return new QuoteController(
                 $app['qwoot.service.quote_service'],
-                $app['qwoot.form_type.quote_form_type']
+                $app['qwoot.form_type.quote_form_type'],
+                $app['security.service.user_service']
             );
         };
 

@@ -5,7 +5,9 @@ namespace Qwoot\Controller;
 use Generic\Controller\AbstractController;
 use Generic\FormType\FormTypeInterface;
 use Qwoot\Service\QuoteService;
+use Security\Service\UserService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuoteController extends AbstractController
 {
@@ -15,16 +17,22 @@ class QuoteController extends AbstractController
     /** @var \Generic\FormType\FormTypeInterface */
     private $quoteFormType;
 
+    /** @var \Security\Service\UserService */
+    private $userService;
+
     /**
      * @param \Qwoot\Service\QuoteService $quoteService
      * @param \Generic\FormType\FormTypeInterface $quoteFormType
+     * @param \Security\Service\UserService $userService
      */
     public function __construct(
         QuoteService $quoteService,
-        FormTypeInterface $quoteFormType
+        FormTypeInterface $quoteFormType,
+        UserService $userService
     ) {
         $this->quoteService = $quoteService;
         $this->quoteFormType = $quoteFormType;
+        $this->userService = $userService;
     }
 
     /**
@@ -63,6 +71,34 @@ class QuoteController extends AbstractController
 
             return $this->response($quoteForm->getData());
         }
+
+        return $this->response();
+    }
+
+    /**
+     * @param int $quoteId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction($quoteId)
+    {
+        $existingQuote = $this->quoteService->find($quoteId);
+        if (!$existingQuote) {
+            $this->statusCode = Response::HTTP_NOT_FOUND;
+
+            return $this->response();
+        }
+
+        $authenticatedUser = $this->userService->getAuthenticatedUser();
+        if ($authenticatedUser['id'] !== $existingQuote['user_id']) {
+            $this->statusCode = Response::HTTP_FORBIDDEN;
+
+            return $this->response();
+        }
+
+        $this->quoteService->delete($quoteId);
+
+        $this->statusCode = Response::HTTP_NO_CONTENT;
 
         return $this->response();
     }

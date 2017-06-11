@@ -178,17 +178,23 @@
     "type": "error"
   }
 ]
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="quotes" class="panel-title">/quotes</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of quotes.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_quotes"><span class="parent"></span>/quotes</a> <span class="methods"><a href="#quotes_get"><span class="badge badge_get">get</span></a> <a href="#quotes_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_quotes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#quotes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of quotes based on filter parameters.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#quotes_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a quote.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of quotes based on filter parameters.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_get_request" data-toggle="tab">Request</a></li><li><a href="#quotes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_get_request"><h3>Query Parameters</h3><ul><li><strong>random</strong>: <em>(string)</em><p>Get random quotes, returns 5 random quotes.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>?random=1</code></pre></div></li></ul></div><div class="tab-pane" id="quotes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": {
-  "context": "Woensdag bugfixdag",
-  "datetime": "2007-04-17 17:31:36",
-  "id": "252",
-  "kudos": null,
-  "person": "Jan Jansen",
-  "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
-  "user": "1"
-},
-"meta": []
-</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a quote.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_post_request" data-toggle="tab">Request</a></li><li><a href="#quotes_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="quotes" class="panel-title">/quotes</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of quotes.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_quotes"><span class="parent"></span>/quotes</a> <span class="methods"><a href="#quotes_get"><span class="badge badge_get">get</span></a> <a href="#quotes_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_quotes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#quotes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of quotes based on filter parameters.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#quotes_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a quote.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of quotes based on filter parameters.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_get_request" data-toggle="tab">Request</a></li><li><a href="#quotes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_get_request"><h3>Headers</h3><ul><li><strong>X-Access-Token</strong>: <em>required (string)</em><p>A JTW token.</p></li></ul><h3>Query Parameters</h3><ul><li><strong>random</strong>: <em>(string)</em><p>Get random quotes, returns 5 random quotes.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>?random=1</code></pre></div></li></ul></div><div class="tab-pane" id="quotes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "context": "Woensdag bugfixdag",
+    "datetime": "2007-04-17 17:31:36",
+    "id": "252",
+    "kudos": null,
+    "person": "Jan Jansen",
+    "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
+    "user": "1"
+  },
+  "meta": []
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": []
+}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/quotes</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a quote.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes_post_request" data-toggle="tab">Request</a></li><li><a href="#quotes_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes_post_request"><h3>Headers</h3><ul><li><strong>X-Access-Token</strong>: <em>required (string)</em><p>A JTW token.</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "context": "Woensdag bugfixdag",
   "datetime": "2007-04-17 17:31:36",
   "kudos": null,
@@ -196,24 +202,40 @@
   "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
   "user": "1"
 }
-</code></pre></div></div><div class="tab-pane" id="quotes_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": {
-  "context": "Woensdag bugfixdag",
-  "datetime": "2007-04-17 17:31:36",
-  "id": "252",
-  "kudos": null,
-  "person": "Jan Jansen",
-  "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
-  "user": "1"
-},
-"meta": []
-</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": [],
-"meta": {
-  "messages": [
-    {
-      "value": "A message, like invalid field etc.",
-      "type": "error"
-    }
-  ]
+</code></pre></div></div><div class="tab-pane" id="quotes_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "context": "Woensdag bugfixdag",
+    "datetime": "2007-04-17 17:31:36",
+    "id": "252",
+    "kudos": null,
+    "person": "Jan Jansen",
+    "quote": "Ja sorry, ik ben standaard elke woensdag ziek",
+    "user": "1"
+  },
+  "meta": []
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": {
+    "messages": [
+      {
+        "value": "A message, like invalid field etc.",
+        "type": "error"
+      }
+    ]
+  }
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": []
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_quotes__quoteid_"><span class="parent">/quotes</span>/{quoteId}</a> <span class="methods"><a href="#quotes__quoteid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_quotes__quoteid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#quotes__quoteid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Delete a quote.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="quotes__quoteid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/quotes</span>/{quoteId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Delete a quote.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#quotes__quoteid__delete_request" data-toggle="tab">Request</a></li><li><a href="#quotes__quoteid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="quotes__quoteid__delete_request"><h3>URI Parameters</h3><ul><li><strong>quoteId</strong>: <em>required (string)</em></li></ul><h3>Headers</h3><ul><li><strong>X-Access-Token</strong>: <em>required (string)</em><p>A JTW token.</p></li></ul></div><div class="tab-pane" id="quotes__quoteid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": []
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": []
 }
 </code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="users" class="panel-title">/users</h3></div><div class="panel-body"><div class="top-resource-description"><p>Action on a user.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users"><span class="parent"></span>/users</a> <span class="methods"><a href="#users_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_users" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a user.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/users</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_post_request" data-toggle="tab">Request</a></li><li><a href="#users_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "name": "full name",
@@ -221,42 +243,50 @@
   "password": "S@feP@ssw0rd",
   "email": "email@email.com"
 }
-</code></pre></div></div><div class="tab-pane" id="users_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": {
-  "email": "email@email.com"
-  "id": 434,
-  "name": "full name",
-  "username": "username"
-},
-"meta": []
-</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": [],
-"meta": {
-  "messages": [
-    {
-      "value": "A message, like invalid field etc.",
-      "type": "error"
-    }
-  ]
+</code></pre></div></div><div class="tab-pane" id="users_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "email": "email@email.com"
+    "id": 434,
+    "name": "full name",
+    "username": "username"
+  },
+  "meta": []
 }
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users__userid_"><span class="parent">/users</span>/{userId}</a> <span class="methods"><a href="#users__userid__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_users__userid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users__userid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update a user.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users__userid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/users</span>/{userId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update a user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users__userid__put_request" data-toggle="tab">Request</a></li><li><a href="#users__userid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users__userid__put_request"><h3>URI Parameters</h3><ul><li><strong>userId</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": {
+    "messages": [
+      {
+        "value": "A message, like invalid field etc.",
+        "type": "error"
+      }
+    ]
+  }
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users__userid_"><span class="parent">/users</span>/{userId}</a> <span class="methods"><a href="#users__userid__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_users__userid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users__userid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update a user.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users__userid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/users</span>/{userId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update a user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users__userid__put_request" data-toggle="tab">Request</a></li><li><a href="#users__userid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users__userid__put_request"><h3>URI Parameters</h3><ul><li><strong>userId</strong>: <em>required (string)</em></li></ul><h3>Headers</h3><ul><li><strong>X-Access-Token</strong>: <em>required (string)</em><p>A JTW token.</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "name": "full name",
   "username": "username",
   "password": "S@feP@ssw0rd",
   "email": "email@email.com"
 }
-</code></pre></div></div><div class="tab-pane" id="users__userid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": {
-  "email": "email@email.com"
-  "id": 434,
-  "name": "full name",
-  "username": "username"
-},
-"meta": []
-</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>"data": [],
-"meta": {
-  "messages": [
-    {
-      "value": "A message, like invalid field etc.",
-      "type": "error"
-    }
-  ]
+</code></pre></div></div><div class="tab-pane" id="users__userid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "email": "email@email.com"
+    "id": 434,
+    "name": "full name",
+    "username": "username"
+  },
+  "meta": []
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": [],
+  "meta": {
+    "messages": [
+      {
+        "value": "A message, like invalid field etc.",
+        "type": "error"
+      }
+    ]
+  }
 }
 </code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#login">/login</a></li><li><a href="#quotes">/quotes</a></li><li><a href="#users">/users</a></li></ul></div></div></div></div></body></html>

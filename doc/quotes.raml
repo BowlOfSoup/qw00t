@@ -1,6 +1,8 @@
 description: Collection of quotes.
 get:
   description: Get a list of quotes based on filter parameters.
+  headers:
+    X-Access-Token: !include generic/header_jwt_token.raml
   queryParameters:
     random:
       description: "Get random quotes, returns 5 random quotes."
@@ -8,9 +10,12 @@ get:
       type: string
       example: "?random=1"
   responses:
-    200: !include quotes/response200.raml
+    200: !include quotes/response_200.raml
+    403: !include generic/response_empty.raml
 post:
   description: Create a quote.
+  headers:
+    X-Access-Token: !include generic/header_jwt_token.raml
   body:
     application/json:
       example: |
@@ -23,17 +28,17 @@ post:
           "user": "1"
         }
   responses:
-    200: !include quotes/response200.raml
-    400:
-      body:
-        application/json:
-          example: |
-            "data": [],
-            "meta": {
-              "messages": [
-                {
-                  "value": "A message, like invalid field etc.",
-                  "type": "error"
-                }
-              ]
-            }
+    200: !include quotes/response_200.raml
+    400: !include generic/response_error.raml
+    403: !include generic/response_empty.raml
+/{quoteId}:
+  delete:
+    description: Delete a quote.
+    headers:
+      X-Access-Token: !include generic/header_jwt_token.raml
+    responses:
+      204:
+        body:
+          application/json: !!null
+      403: !include generic/response_empty.raml
+      404: !include generic/response_empty.raml

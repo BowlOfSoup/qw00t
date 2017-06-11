@@ -20,6 +20,16 @@ class QuoteService
     }
 
     /**
+     * @param $id
+     *
+     * @return array
+     */
+    public function find($id)
+    {
+        return $this->quoteRepository->find($id);
+    }
+
+    /**
      * @return array
      */
     public function findAll()
@@ -48,13 +58,13 @@ class QuoteService
     }
 
     /**
-     * @param array $data
+     * @param int $quoteId
      *
      * @return int
      */
-    public function update(array $data)
+    public function delete($quoteId)
     {
-        return $this->quoteRepository->update($data, $data['id']);
+        return $this->quoteRepository->delete($quoteId);
     }
 
     /**

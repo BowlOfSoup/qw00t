@@ -6,5 +6,7 @@ post:
 /{userId}:
   put:
     description: Update a user.
+    headers:
+      X-Access-Token: !include generic/header_jwt_token.raml
     body: !include users/body.raml
     responses: !include users/responses.raml
