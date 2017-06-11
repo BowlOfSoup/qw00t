@@ -29,7 +29,6 @@ class Http
             }
         });
 
-
         $app->after(function (Request $request, Response $response) {
             // Make sure a 'SecurityResponse' gets translated to the correct format.
             if ($response instanceof SecurityResponse) {

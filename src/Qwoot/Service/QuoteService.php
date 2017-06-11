@@ -2,8 +2,6 @@
 
 namespace Qwoot\Service;
 
-use Doctrine\DBAL\DBALException;
-use Generic\Service\MetaService;
 use Generic\Service\PersonService;
 use Qwoot\Repository\QuoteRepository;
 

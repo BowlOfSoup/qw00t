@@ -40,7 +40,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @param string $providerKey
      *
-     * @return null
+     * @return Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
