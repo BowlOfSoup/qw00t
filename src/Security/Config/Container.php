@@ -99,6 +99,7 @@ class Container implements ServiceProviderInterface
             return new UserService(
                 $app['security.repository.user_repository'],
                 $app['security.encoder.password_encoder'],
+                $app['security.token_storage'],
                 $app['security.defaults']['messages']['username_or_email_already_in_use_error']
             );
         };

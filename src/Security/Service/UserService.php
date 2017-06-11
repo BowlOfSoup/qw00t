@@ -6,6 +6,7 @@ use Generic\Service\MetaService;
 use Security\Encoder\PasswordEncoder;
 use Security\FormType\UserFormType;
 use Security\Repository\UserRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class UserService
 {
@@ -26,10 +27,12 @@ class UserService
     public function __construct(
         UserRepository $userRepository,
         PasswordEncoder $passwordEncoder,
+        TokenStorage $tokenStorage,
         $messageUserOrEmailAlreadyInUse
     ) {
         $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenStorage = $tokenStorage;
         $this->messageUserOrEmailAlreadyInUse = $messageUserOrEmailAlreadyInUse;
     }
 
@@ -41,6 +44,19 @@ class UserService
     public function find($id)
     {
         return $this->userRepository->find($id);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getAuthenticatedUser()
+    {
+        $token = $this->tokenStorage->getToken();
+        if (null === $token) {
+            return null;
+        }
+
+        return $this->userRepository->findByUsername($token->getUser()->getUsername());
     }
 
     /**

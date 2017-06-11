@@ -67,6 +67,13 @@ class UserController extends AbstractController
             $this->statusCode = Response::HTTP_NOT_FOUND;
         }
 
+        $authenticatedUser = $this->userService->getAuthenticatedUser();
+        if ($authenticatedUser['id'] !== $userId) {
+            $this->statusCode = Response::HTTP_FORBIDDEN;
+
+            return $this->response();
+        }
+
         $userForm = $this->userFormType->buildForm();
         $userForm->submit(json_decode($request->getContent(), true));
 
