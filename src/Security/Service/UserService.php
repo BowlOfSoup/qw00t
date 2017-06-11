@@ -25,7 +25,8 @@ class UserService
     /**
      * @param \Security\Repository\UserRepository $userRepository
      * @param \Security\Encoder\PasswordEncoder $passwordEncoder
-     * @param string $messageUserOrEmailAlreadyInUse
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $tokenStorage
+     * @param $messageUserOrEmailAlreadyInUse
      */
     public function __construct(
         UserRepository $userRepository,
