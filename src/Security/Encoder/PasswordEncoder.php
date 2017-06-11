@@ -2,8 +2,8 @@
 
 namespace Security\Encoder;
 
+use Generic\Service\MetaService;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class PasswordEncoder
 {
@@ -53,7 +53,9 @@ class PasswordEncoder
             return true;
         }
 
-        throw new InvalidArgumentException($this->passwordStrengthError);
+        MetaService::addMessage($this->passwordStrengthError);
+
+        return false;
     }
 
     /**

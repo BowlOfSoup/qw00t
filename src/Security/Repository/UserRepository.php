@@ -36,7 +36,7 @@ class UserRepository
     }
 
     /**
-     * Find record by criteria.
+     * Find record by user name.
      *
      * @param mixed $value
      *
@@ -52,13 +52,34 @@ class UserRepository
     }
 
     /**
+     * Find record by user email.
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function findByEmail($value)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM user WHERE email = :value');
+        $stmt->bindValue('value', $value);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
      * @param array $data
      *
      * @return int
      */
     public function insert(array $data)
     {
-        return $this->db->insert(static::TABLE, $data);
+        $result = $this->db->insert(static::TABLE, $data);
+        if (0 !== $result) {
+            return $this->db->lastInsertId();
+        }
+
+        return 0;
     }
 
     /**

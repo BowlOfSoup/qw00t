@@ -5,9 +5,11 @@ namespace Qwoot\Config;
 use Doctrine\DBAL\DBALException;
 use Generic\Controller\AbstractController;
 use Generic\Service\MetaService;
+use Security\Http\SecurityResponse;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class Http
@@ -27,6 +29,16 @@ class Http
             }
         });
 
+
+        $app->after(function (Request $request, Response $response) {
+            // Make sure a 'SecurityResponse' gets translated to the correct format.
+            if ($response instanceof SecurityResponse) {
+                return AbstractController::jsonResponse(json_decode($response->getContent(), true), array());
+            }
+
+            return $response;
+        });
+
         // If route is part of API, do not send pretty responses.
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
             if (false !== strpos($request->getRequestUri(), 'api/')) {
@@ -39,7 +51,11 @@ class Http
                         $message = MetaService::MESSAGE_DATABASE;
                     }
 
-                    error_log($message . ' ' . $e->getTraceAsString());
+                    error_log(get_class($e) . '; ' . $message . '; ' . $e->getTraceAsString());
+                }
+
+                if ($e instanceof AuthenticationCredentialsNotFoundException) {
+                    $code = Response::HTTP_UNAUTHORIZED;
                 }
 
                 if ($e instanceof InvalidArgumentException) {

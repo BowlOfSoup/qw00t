@@ -2,8 +2,6 @@
 
 namespace Qwoot\Config;
 
-use Generic\Controller\AbstractController;
-use Security\Http\JwtResponse;
 use Security\Provider\SecurityProvider;
 use Silex\Application;
 use Silex\Provider\SecurityServiceProvider;
@@ -19,7 +17,6 @@ class Security
     {
         $this->validateDependencies($app);
         $this->configureSecurity($app);
-        $this->handleResponse($app);
     }
 
     /**
@@ -91,22 +88,5 @@ class Security
                 $app->abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Environment variable TOKEN_LIFETIME is not set.');
             }
         }, Application::EARLY_EVENT);
-    }
-
-    /**
-     * Set actions for security specific Responses.
-     *
-     * @param \Silex\Application $app
-     */
-    private function handleResponse(Application $app)
-    {
-        // Make sure a 'JwtResponse' gets translated to the correct format.
-        $app->after(function (Request $request, Response $response) {
-            if ($response instanceof JwtResponse) {
-                return AbstractController::jsonResponse(json_decode($response->getContent(), true), array());
-            }
-
-            return $response;
-        });
     }
 }

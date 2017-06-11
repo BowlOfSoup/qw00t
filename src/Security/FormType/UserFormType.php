@@ -12,7 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserFormType implements FormTypeInterface
 {
+    const PROPERTY_USERNAME = 'username';
     const PROPERTY_PASSWORD = 'password';
+    const PROPERTY_EMAIL = 'email';
 
     /** @var \Symfony\Component\Form\FormFactory */
     private $formFactory;
@@ -34,15 +36,14 @@ class UserFormType implements FormTypeInterface
     {
         return $this->formFactory->createNamedBuilder('', FormType::class)
             ->add(
-                'userName',
+                static::PROPERTY_USERNAME,
                 TextType::class,
                 array(
                     'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('min' => 2))),
-                    'property_path' => '[username]',
                 )
             )
             ->add(
-                'password',
+                static::PROPERTY_PASSWORD,
                 PasswordType::class,
                 array(
                     'constraints' => array(new Assert\NotBlank()),
@@ -56,7 +57,7 @@ class UserFormType implements FormTypeInterface
                 )
             )
             ->add(
-                'email',
+                static::PROPERTY_EMAIL,
                 EmailType::class,
                 array(
                     'constraints' => array(new Assert\Email()),

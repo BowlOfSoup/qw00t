@@ -6,6 +6,7 @@ use Generic\Controller\AbstractController;
 use Generic\FormType\FormTypeInterface;
 use Security\Service\UserService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends AbstractController
 {
@@ -37,10 +38,40 @@ class UserController extends AbstractController
     public function createAction(Request $request)
     {
         $userForm = $this->userFormType->buildForm();
-        $userForm->handleRequest($request);
+        $userForm->submit(json_decode($request->getContent(), true));
 
         if ($this->isFormValid($userForm)) {
             $result = $this->userService->insert($userForm->getData());
+            if (0 === $result) {
+                return $this->response();
+            }
+
+            return $this->response(array_merge(array('id' => $result), $userForm->getData()));
+        }
+
+        return $this->response();
+    }
+
+    /**
+     * Update a user.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $userId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAction(Request $request, $userId)
+    {
+        $existingUser = $this->userService->find($userId);
+        if (!$existingUser) {
+            $this->statusCode = Response::HTTP_NOT_FOUND;
+        }
+
+        $userForm = $this->userFormType->buildForm();
+        $userForm->submit(json_decode($request->getContent(), true));
+
+        if ($this->isFormValid($userForm)) {
+            $result = $this->userService->update($userForm->getData(), $existingUser);
             if (0 === $result) {
                 return $this->response();
             }
@@ -57,7 +88,6 @@ class UserController extends AbstractController
     protected function response(array $controllerResult = array())
     {
         $this->responseMapping = array(
-            'username' => 'userName',
             'password' => null,
         );
 

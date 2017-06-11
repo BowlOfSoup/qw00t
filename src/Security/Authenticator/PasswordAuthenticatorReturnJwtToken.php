@@ -3,7 +3,7 @@
 namespace Security\Authenticator;
 
 use Security\Encoder\JwtTokenEncoder;
-use Security\Http\JwtResponse;
+use Security\Http\SecurityResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -51,9 +51,9 @@ class PasswordAuthenticatorReturnJwtToken extends PasswordAuthenticator
             )
         );
 
-        return new JwtResponse(
+        return new SecurityResponse(
             array(
-                'userName' => $user->getUsername(),
+                'username' => $user->getUsername(),
                 'token' => $jwtToken,
             )
         );

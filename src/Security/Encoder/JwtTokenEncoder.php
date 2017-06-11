@@ -3,6 +3,7 @@
 namespace Security\Encoder;
 
 use Firebase\JWT\JWT;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class JwtTokenEncoder
 {
@@ -73,9 +74,9 @@ class JwtTokenEncoder
         try {
             return JWT::decode($token, $this->secretKey, array($this->algorithm));
         } catch (\UnexpectedValueException $e) {
-            throw new \UnexpectedValueException($e->getMessage());
+            throw new AuthenticationCredentialsNotFoundException();
         } catch (\DomainException $e) {
-            throw new \UnexpectedValueException($e->getMessage());
+            throw new AuthenticationCredentialsNotFoundException();
         }
     }
 }
