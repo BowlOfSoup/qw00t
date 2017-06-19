@@ -2,6 +2,7 @@
 
 namespace Generic\Controller;
 
+use Generic\Service\ArrayService;
 use Generic\Service\MetaService;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,13 +57,9 @@ abstract class AbstractController
      */
     protected function response(array $controllerResult = array())
     {
-        if (!empty($controllerResult) && !array_key_exists(0, $controllerResult)) {
-            $controllerResult = $this->mapPropertiesForResponse($controllerResult);
-        } else {
-            $controllerResult = $this->mapPropertyCollection($controllerResult);
-        }
+        $arrayService = new ArrayService($this->responseMapping);
 
-        return static::jsonResponse($controllerResult, $this->getMeta(), $this->statusCode);
+        return static::jsonResponse($arrayService->map($controllerResult), $this->getMeta(), $this->statusCode);
     }
 
     /**
@@ -106,62 +103,5 @@ abstract class AbstractController
         }
 
         return array(static::WRAPPER_MESSAGES => MetaService::getMessages());
-    }
-
-    /**
-     * Prepares properties before they're being set on a Response.
-     *
-     * @param array $controllerResult
-     *
-     * @return array
-     */
-    private function mapPropertyCollection(array $controllerResult)
-    {
-        foreach ($controllerResult as $key => $item) {
-            $controllerResult = $this->mapPropertiesForResponse($controllerResult, $key);
-        }
-
-        return $controllerResult;
-    }
-
-    /**
-     * Maps property names for a Response.
-     *
-     * @param array $controllerResult
-     * @param string|int|null $parentKey
-     *
-     * @return array
-     */
-    private function mapPropertiesForResponse(array $controllerResult, $parentKey = null)
-    {
-        if (empty($this->responseMapping)) {
-            return $controllerResult;
-        }
-
-        foreach ($this->responseMapping as $originalKey => $replacementKey) {
-            if (null !== $parentKey) {
-                if (null === $replacementKey) {
-                    unset($controllerResult[$parentKey][$originalKey]);
-
-                    continue;
-                }
-
-                $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
-                unset($controllerResult[$parentKey][$originalKey]);
-            } else {
-                if (null === $replacementKey) {
-                    unset($controllerResult[$originalKey]);
-
-                    continue;
-                }
-
-                $controllerResult[$replacementKey] = $controllerResult[$originalKey];
-                unset($controllerResult[$originalKey]);
-            }
-        }
-
-        ksort($controllerResult);
-
-        return $controllerResult;
     }
 }
