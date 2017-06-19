@@ -57,11 +57,10 @@ abstract class AbstractController
     protected function response(array $controllerResult = array())
     {
         if (!empty($controllerResult) && !array_key_exists(0, $controllerResult)) {
-            // Controller result must be sequential array.
-            $controllerResult = array($controllerResult);
+            $controllerResult = $this->mapPropertiesForResponse($controllerResult);
+        } else {
+            $controllerResult = $this->mapPropertyCollection($controllerResult);
         }
-
-        $controllerResult = $this->prepareProperties($controllerResult);
 
         return static::jsonResponse($controllerResult, $this->getMeta(), $this->statusCode);
     }
@@ -116,12 +115,10 @@ abstract class AbstractController
      *
      * @return array
      */
-    private function prepareProperties(array $controllerResult)
+    private function mapPropertyCollection(array $controllerResult)
     {
         foreach ($controllerResult as $key => $item) {
             $controllerResult = $this->mapPropertiesForResponse($controllerResult, $key);
-
-            ksort($controllerResult[$key]);
         }
 
         return $controllerResult;
@@ -131,26 +128,39 @@ abstract class AbstractController
      * Maps property names for a Response.
      *
      * @param array $controllerResult
-     * @param string|int $parentKey
+     * @param string|int|null $parentKey
      *
      * @return array
      */
-    private function mapPropertiesForResponse(array $controllerResult, $parentKey)
+    private function mapPropertiesForResponse(array $controllerResult, $parentKey = null)
     {
         if (empty($this->responseMapping)) {
             return $controllerResult;
         }
 
         foreach ($this->responseMapping as $originalKey => $replacementKey) {
-            if (null === $replacementKey) {
+            if (null !== $parentKey) {
+                if (null === $replacementKey) {
+                    unset($controllerResult[$parentKey][$originalKey]);
+
+                    continue;
+                }
+
+                $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
                 unset($controllerResult[$parentKey][$originalKey]);
+            } else {
+                if (null === $replacementKey) {
+                    unset($controllerResult[$originalKey]);
 
-                continue;
+                    continue;
+                }
+
+                $controllerResult[$replacementKey] = $controllerResult[$originalKey];
+                unset($controllerResult[$originalKey]);
             }
-
-            $controllerResult[$parentKey][$replacementKey] = $controllerResult[$parentKey][$originalKey];
-            unset($controllerResult[$parentKey][$originalKey]);
         }
+
+        ksort($controllerResult);
 
         return $controllerResult;
     }
