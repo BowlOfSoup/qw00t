@@ -16,6 +16,8 @@ class ArrayService
     }
 
     /**
+     * Map keys of properties.
+     *
      * @param array $properties
      * 
      * @return array
@@ -32,7 +34,7 @@ class ArrayService
     }
     
     /**
-     * Prepares properties before they're being set on a Response.
+     * Loop collection of properties and map them.
      *
      * @param array $properties
      *
@@ -48,7 +50,7 @@ class ArrayService
     }
 
     /**
-     * Maps property names for a Response.
+     * Map keys of properties.
      *
      * @param array $properties
      * @param string|int|null $parentKey
