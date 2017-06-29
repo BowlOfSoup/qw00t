@@ -27,7 +27,6 @@ class Http
         $app->before(function (Request $request) use ($app) {
             // Catch OPTIONS requests and indicate headers for CORS, this only works in Silex debug mode.
             if ($app['debug'] && Request::METHOD_OPTIONS === $request->getMethod()) {
-//                $request->setMethod($request->headers->get('Access-Control-Request-Method'));
                 $response = new Response();
                 $response->setStatusCode(Response::HTTP_OK);
 
