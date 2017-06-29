@@ -1,14 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router';
-import { connect } from 'react-redux';
+import Main from './main.jsx';
+import Header from './header.jsx';
 
 class App extends React.Component{
   render() {
     return(
       <div>
-        <main className="main container">
-          {this.props.children}
-        </main>
+        <Header />
+        <Main />
       </div>
     )
   }
