@@ -13,6 +13,8 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
 {
+    const DEFAULT_HEADER_TOKEN = 'X-Access-Token';
+
     /**
      * Returns true if the credentials are valid.
      *
