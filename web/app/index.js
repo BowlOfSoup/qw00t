@@ -1,11 +1,10 @@
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import App from './components/app.jsx';
 import { BrowserRouter, Route } from 'react-router-dom'
 import {Provider} from 'react-redux';
 import css from './style.scss';
-import App from './components/app.jsx';
-import Home from './components/home.jsx';
 import configureStore from './store/configureStore';
 
 function scrollTop(nextState, replace) {
@@ -18,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
 
     <BrowserRouter>
-        <Route path="/" component={Home} />
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('app')

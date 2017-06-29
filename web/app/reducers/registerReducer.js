@@ -2,12 +2,10 @@ import * as types from '../actions/actionTypes';
 
 export default function qoutesReducer(state = {}, action) {
   switch(action.type) {
-    case types.GET_QUOTES_SUCCESS:
-    
-      let quotes = action.data;
-
+    case types.REGISTER_SUCCESS:
+      let user = action.data;
       return Object.assign({}, state, {
-        data: quotes.data
+        user: user.data
       });
 
     default:
