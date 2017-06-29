@@ -53,6 +53,7 @@ export const login = (data) => {
         'X-Access-Token': data.userdata.username + ':' + data.userdata.password
       })
     })
+      .then(response => response.json())
       .then(function(response) {
         dispatch(registerSuccess(response.data));
       })
